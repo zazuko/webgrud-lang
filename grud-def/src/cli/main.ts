@@ -4,7 +4,7 @@ import { Command } from 'commander';
 import { WebGrudDefinitionsLanguageMetaData } from '../language/generated/module.js';
 import { createWebGrudDefinitionsServices } from '../language/web-grud-definitions-module.js';
 import { extractAstNode } from './cli-util.js';
-import { generateJavaScript } from './generator.js';
+import { generateN3 } from './generator.js';
 import { NodeFileSystem } from 'langium/node';
 import * as url from 'node:url';
 import * as fs from 'node:fs/promises';
@@ -17,8 +17,8 @@ const packageContent = await fs.readFile(packagePath, 'utf-8');
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
     const services = createWebGrudDefinitionsServices(NodeFileSystem).WebGrudDefinitions;
     const model = await extractAstNode<Model>(fileName, services);
-    const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
-    console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
+    const generatedFilePath = generateN3(model, fileName, opts.destination);
+    console.log(chalk.green(`N3 rules generated successfully: ${generatedFilePath}`));
 };
 
 export type GenerateOptions = {
@@ -35,7 +35,7 @@ export default function(): void {
         .command('generate')
         .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
         .option('-d, --destination <dir>', 'destination directory of generating')
-        .description('generates JavaScript code that prints "Hello, {name}!" for each greeting in a source file')
+        .description('generates N3 rules for each factor in a source file')
         .action(generateAction);
 
     program.parse(process.argv);

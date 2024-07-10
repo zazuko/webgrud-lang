@@ -1,0 +1,20 @@
+@base <https://agriculture.ld.admin.ch/agroscope/> .
+@prefix : <https://agriculture.ld.admin.ch/prif/> .
+@prefix calc: <https://agriculture.ld.admin.ch/prif/calc#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix cube: <https://cube.link/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :fertilizationNorm calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :maxTargetYield calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT11 calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT13 calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT15 calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorByCrop calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientIfSilty calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientIfSandy calc:source ?obs . }
+{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientDefault calc:source ?obs . }
