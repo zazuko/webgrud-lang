@@ -1,0 +1,15 @@
+{
+    "projectName": "WebGrudDefinitions",
+    "languages": [{
+        "id": "web-grud-definitions",
+        "grammar": "src/language/web-grud-definitions.langium",
+        "fileExtensions": [".grud"],
+        "textMate": {
+            "out": "syntaxes/web-grud-definitions.tmLanguage.json"
+        },
+        "monarch": {
+            "out": "src/syntaxes/web-grud-definitions.monarch.ts"
+        }
+    }],
+    "out": "src/language/generated"
+}

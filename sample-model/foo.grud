@@ -1,0 +1,166 @@
+// ----[ factors ]-------------------------------------------------------------------
+
+// TODO: referenceYield (?obs <PRIFm8t9a/producttype> "mainProduct")
+// TODO: correctionT12 (with treshold)
+// TODO: correctionT13 fallback value (:correctionT13 rdf:value 0)
+// TODO: removal (?obs <PRIFm8t9b/product> "byProduct")
+// TODO: fertilizerNutrientContent ( from XOR [ request | PRIFm4t6s | PRIFm4t6m ])
+// TODO: availableN (PRIFm8t14/percentaccountablen)
+// TODO: XOR [ correctionFactorBySoilNutrientIfSilty | correctionFactorBySoilNutrientIfSandy | correctionFactorBySoilNutrientDefault ]
+
+
+factor fertilizationNorm {
+  from cube PRIFm8t9c // TODO: (cross-ref) dimension fertilizationnormkgha
+  label "fertilization norm"
+}
+
+// factor referenceYield {
+//   from cube PRIFm8t9a // TODO: (cross-ref) dimension referenceyielddtha
+//   label "reference yield"
+// }
+
+// note: in webgrud-app 'maxTargetYield' and 'correctionT11' are declared in a single rule (premise and conclusion are shared, not independent)
+factor maxTargetYield {
+  from cube PRIFm8t11 // TODO: (cross-ref) dimension maxtargetyielddtha
+  label "max target yield"
+}
+
+factor correctionT11 {
+  from cube PRIFm8t11 // TODO: (cross-ref) dimension correctiontargetyieldkgdt
+  label "correction (target yield)"
+}
+
+factor correctionT13 {
+  from cube PRIFm8t13 // TODO: (cross-ref) dimension correctionfactormean
+  label "correction (prev. crop)"  
+}
+
+factor correctionT15 {
+  from cube PRIFm8t15 // TODO: (cross-ref) dimension correctionvalue
+  label "correction (rainfall)"
+}
+
+// factor removal {
+//   from cube PRIFm8t9b // TODO: (cross-ref) dimension removalkgha
+//   label "removal"
+// }
+
+factor correctionFactorByCrop {
+  from cube PRIFm8t21 // TODO: (cross-ref) dimension correctionfactor
+  label "correction (crop)"
+}
+
+factor correctionFactorBySoilNutrientIfSilty {
+  from cube PRIFm2t10a // TODO: (cross-ref) dimension correctionfactor
+  label "correction (soil nutrient) silty"
+}
+
+factor correctionFactorBySoilNutrientIfSandy {
+  from cube PRIFm2t10b // TODO: (cross-ref) dimension correctionfactor
+  label "correction (soil nutrient) sandy"
+}
+
+factor correctionFactorBySoilNutrientDefault {
+  from cube PRIFm2t10t18 // TODO: (cross-ref) dimension correctionfactor
+  label "correction (soil nutrient) default"
+}
+
+
+// ----[ cubes ]-------------------------------------------------------------------
+
+// from PRIFm8t9c we get the fertilization norm of the input crop for nutrient N.
+cube PRIFm8t9c {
+  version 3
+  dimension fertilizationnormkgha {
+    unit KiloGM_PER_HA
+  }
+}
+
+// from PRIFm8t9a we get the reference yield for the main product of the input crop.
+// cube PRIFm8t9a {
+//   version 4
+//   dimension referenceyielddtha {
+//     unit DeciTONNE_PER_HA    
+//   }
+
+//     // TODO: N3 rule has additional pattern in rule premise: ?obs <PRIFm8t9a/producttype> "mainProduct".
+// }
+
+// from PRIFm8t11 we get the maximum target yield and the correction value for the input crop.
+cube PRIFm8t11 {
+  version 1
+  dimension maxtargetyielddtha {
+    unit DeciTONNE_PER_HA
+  }
+  dimension correctiontargetyieldkgdt {
+    unit KiloGM_PER_DeciTONNE
+  }
+}
+
+// from PRIFm8t13 we get a correction value given input values for 
+// the previous crop, the season of incorporation, the season of sowing and further specification
+cube PRIFm8t13 {
+  version 3
+  dimension correctionfactormean {
+    unit KiloGM_PER_HA
+  }
+}
+
+// from PRIFm8t15 we get the correction value for the input crop and the input time and intesity of rainfall
+cube PRIFm8t15 {
+  version 1
+  dimension correctionvalue {
+    unit KiloGM_PER_HA
+  }
+}
+
+// removal
+// cube PRIFm8t9b {
+//   version 6
+//   dimension removalkgha {
+//     unit KiloGM_PER_HA
+//   }
+
+//      // TODO: N3 rule has additional pattern in rule premise: ?obs <PRIFm8t9b/product> "byProduct".
+// }
+
+
+// correction factor by crop
+cube PRIFm8t21 {
+  version 3
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+// silty soil
+cube PRIFm2t10a {
+  version 3
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+// sandy soil
+cube PRIFm2t10b {
+  version 3
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+// default to PRIFm2t10t18 for correction factor
+cube PRIFm2t10t18 {
+  version 4
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+
+// ----[ units ]-------------------------------------------------------------------
+
+unit KiloGM_PER_HA "unit:KiloGM-PER-HA"
+unit DeciTONNE_PER_HA "unit:DeciTONNE-PER-HA"
+unit KiloGM_PER_DeciTONNE "unit:KiloGM-PER-DeciTONNE"
+unit NUM "unit:NUM"
