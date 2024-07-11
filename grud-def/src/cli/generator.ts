@@ -22,7 +22,7 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
 
-        ${joinToNode(model.factors, factor => `{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :${factor.name} calc:source ?obs . }`, { appendNewLineIfNotEmpty: true })}
+        ${joinToNode(model.factors, factor => `{ <${factor.cube.ref?.name}/${factor.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] . } => { :${factor.name} calc:source ?obs . }`, { appendNewLineIfNotEmpty: true })}
     `.appendNewLineIfNotEmpty();
 
     if (!fs.existsSync(data.destination)) {
