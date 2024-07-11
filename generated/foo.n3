@@ -9,12 +9,12 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :fertilizationNorm calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :maxTargetYield calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT11 calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT13 calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT15 calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorByCrop calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientIfSilty calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientIfSandy calc:source ?obs . }
-{ <CUBE/VERSION> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientDefault calc:source ?obs . }
+{ <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] . } => { :fertilizationNorm calc:source ?obs . }
+{ <PRIFm8t11/1> cube:observationSet [ cube:observation ?obs ] . } => { :maxTargetYield calc:source ?obs . }
+{ <PRIFm8t11/1> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT11 calc:source ?obs . }
+{ <PRIFm8t13/3> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT13 calc:source ?obs . }
+{ <PRIFm8t15/1> cube:observationSet [ cube:observation ?obs ] . } => { :correctionT15 calc:source ?obs . }
+{ <PRIFm8t21/3> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorByCrop calc:source ?obs . }
+{ <PRIFm2t10a/3> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientIfSilty calc:source ?obs . }
+{ <PRIFm2t10b/3> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientIfSandy calc:source ?obs . }
+{ <PRIFm2t10t18/4> cube:observationSet [ cube:observation ?obs ] . } => { :correctionFactorBySoilNutrientDefault calc:source ?obs . }
