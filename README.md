@@ -1,6 +1,6 @@
 # webgrud-lang
 
-A DSL for some parts of WebGRUD fertilization rule definitions. Generates N3. Built with [Langium](https://langium.org/) .
+A DSL for some parts of [WebGRUD fertilization rule definitions](https://github.com/zazuko/webgrud-app/tree/master/rules). Generates [N3](https://w3c.github.io/N3/spec/). Built with [Langium](https://langium.org/) .
 
 ## Contents
 ```
