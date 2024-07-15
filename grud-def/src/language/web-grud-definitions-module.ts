@@ -2,6 +2,7 @@ import { type Module, inject } from 'langium';
 import { createDefaultModule, createDefaultSharedModule, type DefaultSharedModuleContext, type LangiumServices, type LangiumSharedServices, type PartialLangiumServices } from 'langium/lsp';
 import { WebGrudDefinitionsGeneratedModule, WebGrudDefinitionsGeneratedSharedModule } from './generated/module.js';
 import { WebGrudDefinitionsValidator, registerValidationChecks } from './web-grud-definitions-validator.js';
+import { WebGrudDefinitionsScopeComputation } from './web-grud-definitions-scope.js';
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -24,6 +25,9 @@ export type WebGrudDefinitionsServices = LangiumServices & WebGrudDefinitionsAdd
  * selected services, while the custom services must be fully specified.
  */
 export const WebGrudDefinitionsModule: Module<WebGrudDefinitionsServices, PartialLangiumServices & WebGrudDefinitionsAddedServices> = {
+    references: {
+        ScopeComputation: (services) => new WebGrudDefinitionsScopeComputation(services)
+    },
     validation: {
         WebGrudDefinitionsValidator: () => new WebGrudDefinitionsValidator()
     }

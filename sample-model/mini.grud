@@ -1,5 +1,5 @@
 factor fertilizationNorm {
-  from cube PRIFm8t9c
+  from cube PRIFm8t9c dimension fertilizationnormkgha
   label "fertilization norm"
 }
 

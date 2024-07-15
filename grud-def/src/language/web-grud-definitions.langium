@@ -19,7 +19,7 @@ Unit:
 
 Factor:
     'factor' name=ID '{'
-        'from' 'cube' cube=[Cube:ID]  // TODO: (cross-ref) 'dimension' dimension=[Dimension:ID]
+        'from' 'cube' cube=[Cube:ID]  'dimension' dimension=[Dimension:ID]
         'label' label=STRING
     '}';
 

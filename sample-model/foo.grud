@@ -10,58 +10,58 @@
 
 
 factor fertilizationNorm {
-  from cube PRIFm8t9c // TODO: (cross-ref) dimension fertilizationnormkgha
+  from cube PRIFm8t9c dimension fertilizationnormkgha
   label "fertilization norm"
 }
 
 // factor referenceYield {
-//   from cube PRIFm8t9a // TODO: (cross-ref) dimension referenceyielddtha
+//   from cube PRIFm8t9a dimension referenceyielddtha
 //   label "reference yield"
 // }
 
 // note: in webgrud-app 'maxTargetYield' and 'correctionT11' are declared in a single rule (premise and conclusion are shared, not independent)
 factor maxTargetYield {
-  from cube PRIFm8t11 // TODO: (cross-ref) dimension maxtargetyielddtha
+  from cube PRIFm8t11 dimension maxtargetyielddtha
   label "max target yield"
 }
 
 factor correctionT11 {
-  from cube PRIFm8t11 // TODO: (cross-ref) dimension correctiontargetyieldkgdt
+  from cube PRIFm8t11 dimension correctiontargetyieldkgdt
   label "correction (target yield)"
 }
 
 factor correctionT13 {
-  from cube PRIFm8t13 // TODO: (cross-ref) dimension correctionfactormean
+  from cube PRIFm8t13 dimension correctionfactormean
   label "correction (prev. crop)"  
 }
 
 factor correctionT15 {
-  from cube PRIFm8t15 // TODO: (cross-ref) dimension correctionvalue
+  from cube PRIFm8t15 dimension correctionvalue
   label "correction (rainfall)"
 }
 
 // factor removal {
-//   from cube PRIFm8t9b // TODO: (cross-ref) dimension removalkgha
+//   from cube PRIFm8t9b dimension removalkgha
 //   label "removal"
 // }
 
 factor correctionFactorByCrop {
-  from cube PRIFm8t21 // TODO: (cross-ref) dimension correctionfactor
+  from cube PRIFm8t21 dimension correctionfactor
   label "correction (crop)"
 }
 
 factor correctionFactorBySoilNutrientIfSilty {
-  from cube PRIFm2t10a // TODO: (cross-ref) dimension correctionfactor
+  from cube PRIFm2t10a dimension correctionfactor
   label "correction (soil nutrient) silty"
 }
 
 factor correctionFactorBySoilNutrientIfSandy {
-  from cube PRIFm2t10b // TODO: (cross-ref) dimension correctionfactor
+  from cube PRIFm2t10b dimension correctionfactor
   label "correction (soil nutrient) sandy"
 }
 
 factor correctionFactorBySoilNutrientDefault {
-  from cube PRIFm2t10t18 // TODO: (cross-ref) dimension correctionfactor
+  from cube PRIFm2t10t18 dimension correctionfactor
   label "correction (soil nutrient) default"
 }
 
