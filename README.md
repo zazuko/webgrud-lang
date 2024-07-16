@@ -42,7 +42,13 @@ $ npm run build
 * Press `F5` to launch the extension in a new *Extension Development Host* window.
 * Open a folder and create or open a file with file extension `.grud`
 
+### Using the editor in the browser
 
+Start the dev web server (inside *./grud-def*):
+
+```
+$ npm run serve
+```
 
 ### Using the CLI
 
