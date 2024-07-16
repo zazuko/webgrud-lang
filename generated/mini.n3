@@ -9,4 +9,16 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 
-{ <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] . } => { :fertilizationNorm calc:source ?obs . }
+
+{
+    <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <PRIFm8t9c/fertilizationnormkgha> ?fertilizationnormkgha .
+}
+=>
+{
+    :fertilizationNorm
+        rdf:value ?fertilizationnormkgha ;
+        qudt:unit unit:KiloGM-PER-HA ;
+        calc:source ?obs .
+}
+.

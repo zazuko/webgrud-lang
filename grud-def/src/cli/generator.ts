@@ -8,8 +8,6 @@ export function generateN3(model: Model, filePath: string, destination: string |
     const data = extractDestinationAndName(filePath, destination);
     const generatedFilePath = `${path.join(data.destination, data.name)}.n3`;
 
-    // elvis ${person.ref?.name}
-
     const fileNode = expandToNode`
         @base <https://agriculture.ld.admin.ch/agroscope/> .
         @prefix : <https://agriculture.ld.admin.ch/prif/> .
@@ -22,8 +20,20 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
 
-        ${joinToNode(model.factors, factor => `{ <${factor.cube.ref?.name}/${factor.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] . } => { :${factor.name} calc:source ?obs . }`, { appendNewLineIfNotEmpty: true })}
-    `.appendNewLineIfNotEmpty();
+        ${joinToNode(model.factors, factor => `
+{
+    <${factor.cube.ref?.name}/${factor.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <${factor.cube.ref?.name}/${factor.dimension.ref?.name}> ?${factor.dimension.ref?.name} .
+}
+=>
+{
+    :${factor.name}
+        rdf:value ?${factor.dimension.ref?.name} ;
+        qudt:unit ${factor.dimension.ref?.unit.ref?.prefixedName} ;
+        calc:source ?obs .
+}
+.`, { appendNewLineIfNotEmpty: true })}
+        `.appendNewLineIfNotEmpty();
 
     if (!fs.existsSync(data.destination)) {
         fs.mkdirSync(data.destination, { recursive: true });
