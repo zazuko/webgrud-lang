@@ -1,4 +1,5 @@
 import type { Model } from '../language/generated/ast.js';
+import { isSourcedValue } from '../language/generated/ast.js';
 import { expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -20,16 +21,16 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
 
-        ${joinToNode(model.factors, factor => `
+        ${joinToNode(model.values.filter(isSourcedValue), sourcedValue => `
 {
-    <${factor.cube.ref?.name}/${factor.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <${factor.cube.ref?.name}/${factor.dimension.ref?.name}> ?${factor.dimension.ref?.name} .
+    <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <${sourcedValue.cube.ref?.name}/${sourcedValue.resultDimension.ref?.name}> ?${sourcedValue.resultDimension.ref?.name} .
 }
 =>
 {
-    :${factor.name}
-        rdf:value ?${factor.dimension.ref?.name} ;
-        qudt:unit ${factor.dimension.ref?.unit.ref?.prefixedName} ;
+    :${sourcedValue.name}
+        rdf:value ?${sourcedValue.resultDimension.ref?.name} ;
+        qudt:unit ${sourcedValue.resultDimension.ref?.unit?.ref?.prefixedName} ;
         calc:source ?obs .
 }
 .`, { appendNewLineIfNotEmpty: true })}

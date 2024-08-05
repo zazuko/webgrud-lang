@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import { Command } from 'commander';
 import { WebGrudDefinitionsLanguageMetaData } from '../language/generated/module.js';
 import { createWebGrudDefinitionsServices } from '../language/web-grud-definitions-module.js';
-import { extractAstNode } from './cli-util.js';
+import { setRootFolder, extractAstNode } from './cli-util.js';
 import { generateN3 } from './generator.js';
 import { NodeFileSystem } from 'langium/node';
 import * as url from 'node:url';
@@ -16,12 +16,15 @@ const packageContent = await fs.readFile(packagePath, 'utf-8');
 
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
     const services = createWebGrudDefinitionsServices(NodeFileSystem).WebGrudDefinitions;
+    await setRootFolder(fileName, services, opts.root);
     const model = await extractAstNode<Model>(fileName, services);
+    model.$document?.references
     const generatedFilePath = generateN3(model, fileName, opts.destination);
     console.log(chalk.green(`N3 rules generated successfully: ${generatedFilePath}`));
 };
 
 export type GenerateOptions = {
+    root?: string;
     destination?: string;
 }
 
@@ -34,6 +37,7 @@ export default function(): void {
     program
         .command('generate')
         .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
+        .option('-r, --root <dir>', 'source root folder')
         .option('-d, --destination <dir>', 'destination directory of generating')
         .description('generates N3 rules for each factor in a source file')
         .action(generateAction);

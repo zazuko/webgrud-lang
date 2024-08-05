@@ -24,6 +24,19 @@
 .
 
 {
+    <PRIFm8t9a/4> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <PRIFm8t9a/referenceyielddtha> ?referenceyielddtha .
+}
+=>
+{
+    :referenceYield
+        rdf:value ?referenceyielddtha ;
+        qudt:unit unit:DeciTONNE-PER-HA ;
+        calc:source ?obs .
+}
+.
+
+{
     <PRIFm8t11/1> cube:observationSet [ cube:observation ?obs ] .
     ?obs <PRIFm8t11/maxtargetyielddtha> ?maxtargetyielddtha .
 }
@@ -58,71 +71,6 @@
     :correctionT13
         rdf:value ?correctionfactormean ;
         qudt:unit unit:KiloGM-PER-HA ;
-        calc:source ?obs .
-}
-.
-
-{
-    <PRIFm8t15/1> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm8t15/correctionvalue> ?correctionvalue .
-}
-=>
-{
-    :correctionT15
-        rdf:value ?correctionvalue ;
-        qudt:unit unit:KiloGM-PER-HA ;
-        calc:source ?obs .
-}
-.
-
-{
-    <PRIFm8t21/3> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm8t21/correctionfactor> ?correctionfactor .
-}
-=>
-{
-    :correctionFactorByCrop
-        rdf:value ?correctionfactor ;
-        qudt:unit unit:NUM ;
-        calc:source ?obs .
-}
-.
-
-{
-    <PRIFm2t10a/3> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm2t10a/correctionfactor> ?correctionfactor .
-}
-=>
-{
-    :correctionFactorBySoilNutrientIfSilty
-        rdf:value ?correctionfactor ;
-        qudt:unit unit:NUM ;
-        calc:source ?obs .
-}
-.
-
-{
-    <PRIFm2t10b/3> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm2t10b/correctionfactor> ?correctionfactor .
-}
-=>
-{
-    :correctionFactorBySoilNutrientIfSandy
-        rdf:value ?correctionfactor ;
-        qudt:unit unit:NUM ;
-        calc:source ?obs .
-}
-.
-
-{
-    <PRIFm2t10t18/4> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm2t10t18/correctionfactor> ?correctionfactor .
-}
-=>
-{
-    :correctionFactorBySoilNutrientDefault
-        rdf:value ?correctionfactor ;
-        qudt:unit unit:NUM ;
         calc:source ?obs .
 }
 .

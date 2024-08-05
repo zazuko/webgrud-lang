@@ -1,4 +1,4 @@
-import type { AstNode, LangiumCoreServices, LangiumDocument } from 'langium';
+import type { AstNode, LangiumCoreServices, LangiumDocument, WorkspaceFolder } from 'langium';
 import chalk from 'chalk';
 import * as path from 'node:path';
 import * as fs from 'node:fs';
@@ -35,6 +35,20 @@ export async function extractDocument(fileName: string, services: LangiumCoreSer
 
 export async function extractAstNode<T extends AstNode>(fileName: string, services: LangiumCoreServices): Promise<T> {
     return (await extractDocument(fileName, services)).parseResult?.value as T;
+}
+
+export async function setRootFolder(fileName: string, services: LangiumCoreServices, root?: string): Promise<void> {
+    if (!root) {
+        root = path.dirname(fileName);
+    }
+    if (!path.isAbsolute(root)) {
+        root = path.resolve(process.cwd(), root);
+    }
+    const folders: WorkspaceFolder[] = [{
+        name: path.basename(root),
+        uri: URI.file(root).toString()
+    }];
+    await services.shared.workspace.WorkspaceManager.initializeWorkspace(folders);
 }
 
 interface FilePathData {

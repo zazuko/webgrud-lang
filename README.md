@@ -6,7 +6,7 @@ A DSL for some parts of [WebGRUD fertilization rule definitions](https://github.
 ```
 .
 ├── generated  ----------------------------------< Generated N3 rules for sample model
-│   └── foo.n3
+│   └── fertilizationN.n3
 │
 ├── grud-def  -----------------------------------< The Langium project
 │   └── src
@@ -16,7 +16,7 @@ A DSL for some parts of [WebGRUD fertilization rule definitions](https://github.
 │           └── web-grud-definitions.langium  ---< Grammar definition
 │
 └── sample-model  -------------------------------< Sample model of WebGRUD definitions
-    └── foo.grud
+    └── fertilizationN.grud
 ```
 
 ## Building the Langium project
@@ -52,9 +52,9 @@ $ npm run serve
 
 ### Using the CLI
 
-Generate N3 rules from file *foo.grud* :
+Generate N3 rules from file *fertilizationN.grud* :
 
 ```
-$ node grud-def/bin/cli.js generate sample-model/foo.grud 
-N3 rules generated successfully: generated/foo.n3
+$ node grud-def/bin/cli.js generate -r sample-model sample-model/fertilizationN.grud
+N3 rules generated successfully: generated/fertilizationN.n3
 ```
