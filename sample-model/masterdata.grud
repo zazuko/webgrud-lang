@@ -1,0 +1,121 @@
+// ----[ tables ]-------------------------------------------------------------------
+
+// from PRIFm8t9c we get the fertilization norm of the input crop for nutrient N.
+table PRIFm8t9c {
+  version 3
+  dimension fertilizationnormkgha {
+    unit KiloGM_PER_HA
+  }
+  dimension nutrient_
+  dimension crop
+}
+
+// from PRIFm8t9a we get the reference yield for the main product of the input crop.
+table PRIFm8t9a {
+  version 4
+  dimension referenceyielddtha {
+    unit DeciTONNE_PER_HA    
+  }
+  dimension crop
+  dimension producttype
+
+//     // TODO: N3 rule has additional pattern in rule premise: ?obs <PRIFm8t9a/producttype> "mainProduct".
+}
+
+// from PRIFm8t11 we get the maximum target yield and the correction value for the input crop.
+table PRIFm8t11 {
+  version 1
+  dimension maxtargetyielddtha {
+    unit DeciTONNE_PER_HA
+  }
+  dimension correctiontargetyieldkgdt {
+    unit KiloGM_PER_DeciTONNE
+  }
+  dimension crop
+}
+
+// from PRIFm8t13 we get a correction value given input values for 
+// the previous crop, the season of incorporation, the season of sowing and further specification
+table PRIFm8t13 {
+  version 3
+  dimension correctionfactormean {
+    unit KiloGM_PER_HA
+  }
+  dimension precrop
+  dimension seasonincorporation
+  dimension seasonsowingaftercrop
+  dimension specifications
+  dimension correctionfactormean
+}
+
+// from PRIFm8t15 we get the correction value for the input crop and the input time and intesity of rainfall
+table PRIFm8t15 {
+  version 1
+  dimension correctionvalue {
+    unit KiloGM_PER_HA
+  }
+}
+
+// removal
+// table PRIFm8t9b {
+//   version 6
+//   dimension removalkgha {
+//     unit KiloGM_PER_HA
+//   }
+
+//      // TODO: N3 rule has additional pattern in rule premise: ?obs <PRIFm8t9b/product> "byProduct".
+// }
+
+
+// correction factor by crop
+table PRIFm8t21 {
+  version 3
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+// silty soil
+table PRIFm2t10a {
+  version 3
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+// sandy soil
+table PRIFm2t10b {
+  version 3
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+// default to PRIFm2t10t18 for correction factor
+table PRIFm2t10t18 {
+  version 4
+  dimension correctionfactor {
+    unit NUM
+  }
+}
+
+
+// ----[ units ]-------------------------------------------------------------------
+
+unit KiloGM_PER_HA "unit:KiloGM-PER-HA"
+unit DeciTONNE_PER_HA "unit:DeciTONNE-PER-HA"
+unit KiloGM_PER_DeciTONNE "unit:KiloGM-PER-DeciTONNE"
+unit NUM "unit:NUM"
+
+
+// ----[ nutrients ]-------------------------------------------------------------------
+
+nutrient N
+
+
+// ----[ input parameters ]-------------------------------------------------------------------
+input parameter crop
+input parameter preCrop
+input parameter seasonincorporation
+input parameter seasonsowing
+input parameter specification

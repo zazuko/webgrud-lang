@@ -1,0 +1,66 @@
+// ----[ DEPRECATED  ]-------------------------------------------------------------------
+
+// TODO: referenceYield (?obs <PRIFm8t9a/producttype> "mainProduct")
+// TODO: correctionT12 (with treshold)
+// TODO: correctionT13 fallback value (:correctionT13 rdf:value 0)
+// TODO: removal (?obs <PRIFm8t9b/product> "byProduct")
+// TODO: fertilizerNutrientContent ( from XOR [ request | PRIFm4t6s | PRIFm4t6m ])
+// TODO: availableN (PRIFm8t14/percentaccountablen)
+// TODO: XOR [ correctionFactorBySoilNutrientIfSilty | correctionFactorBySoilNutrientIfSandy | correctionFactorBySoilNutrientDefault ]
+
+
+factor fertilizationNorm {
+  from table PRIFm8t9c dimension fertilizationnormkgha
+  label "fertilization norm"
+}
+
+// factor referenceYield {
+//   from table PRIFm8t9a dimension referenceyielddtha
+//   label "reference yield"
+// }
+
+// note: in webgrud-app 'maxTargetYield' and 'correctionT11' are declared in a single rule (premise and conclusion are shared, not independent)
+factor maxTargetYield {
+  from table PRIFm8t11 dimension maxtargetyielddtha
+  label "max target yield"
+}
+
+factor correctionT11 {
+  from table PRIFm8t11 dimension correctiontargetyieldkgdt
+  label "correction (target yield)"
+}
+
+factor correctionT13 {
+  from table PRIFm8t13 dimension correctionfactormean
+  label "correction (prev. crop)"  
+}
+
+factor correctionT15 {
+  from table PRIFm8t15 dimension correctionvalue
+  label "correction (rainfall)"
+}
+
+// factor removal {
+//   from table PRIFm8t9b dimension removalkgha
+//   label "removal"
+// }
+
+factor correctionFactorByCrop {
+  from table PRIFm8t21 dimension correctionfactor
+  label "correction (crop)"
+}
+
+factor correctionFactorBySoilNutrientIfSilty {
+  from table PRIFm2t10a dimension correctionfactor
+  label "correction (soil nutrient) silty"
+}
+
+factor correctionFactorBySoilNutrientIfSandy {
+  from table PRIFm2t10b dimension correctionfactor
+  label "correction (soil nutrient) sandy"
+}
+
+factor correctionFactorBySoilNutrientDefault {
+  from table PRIFm2t10t18 dimension correctionfactor
+  label "correction (soil nutrient) default"
+}
