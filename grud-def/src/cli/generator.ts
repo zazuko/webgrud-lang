@@ -1,6 +1,6 @@
 import type { Model, SourcedValue } from '../language/generated/ast.js';
 import { isSourcedValue, isStringEqualityCondition } from '../language/generated/ast.js';
-import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
+import { type Generated, expandToNode, joinToNode, toString, expandToString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { extractDestinationAndName } from './cli-util.js';
@@ -33,6 +33,19 @@ export function generateN3(model: Model, filePath: string, destination: string |
 }
 
 function generateSourcedValue(sourcedValue: SourcedValue): Generated {
+    const maybeDefaultValue = sourcedValue.defaultValue !== undefined ? expandToString`
+
+        {
+            [] log:notIncludes { <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [] } .
+        }
+        =>
+        {
+            :${sourcedValue.name} rdf:value ${sourcedValue.defaultValue} ;
+                calc:note "no correction value available" .
+        }
+        .`
+        :'';
+
     return expandToNode`
 {
     <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
@@ -49,5 +62,6 @@ function generateSourcedValue(sourcedValue: SourcedValue): Generated {
         calc:source ?obs .
 }
 .
-`.appendNewLine();
+${maybeDefaultValue}
+`.appendNewLineIfNotEmpty();
 }

@@ -76,3 +76,12 @@
 }
 .
 
+{
+    [] log:notIncludes { <PRIFm8t13/3> cube:observationSet [] } .
+}
+=>
+{
+    :correctionT13 rdf:value 0 ;
+        calc:note "no correction value available" .
+}
+.
