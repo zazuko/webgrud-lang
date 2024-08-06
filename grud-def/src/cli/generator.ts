@@ -1,4 +1,4 @@
-import type { Model } from '../language/generated/ast.js';
+import type { Model, SourcedValue } from '../language/generated/ast.js';
 import { isSourcedValue } from '../language/generated/ast.js';
 import { expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
@@ -20,8 +20,19 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix unit: <http://qudt.org/vocab/unit/> .
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
+        
+        ${joinToNode(model.values.filter(isSourcedValue), generateSourcedValue, { appendNewLineIfNotEmpty: true })}
+    `;
 
-        ${joinToNode(model.values.filter(isSourcedValue), sourcedValue => `
+    if (!fs.existsSync(data.destination)) {
+        fs.mkdirSync(data.destination, { recursive: true });
+    }
+    fs.writeFileSync(generatedFilePath, toString(fileNode));
+    return generatedFilePath;
+}
+
+function generateSourcedValue(sourcedValue: SourcedValue): string {
+    return `
 {
     <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
     ?obs <${sourcedValue.cube.ref?.name}/${sourcedValue.resultDimension.ref?.name}> ?${sourcedValue.resultDimension.ref?.name} .
@@ -33,12 +44,5 @@ export function generateN3(model: Model, filePath: string, destination: string |
         qudt:unit ${sourcedValue.resultDimension.ref?.unit?.ref?.prefixedName} ;
         calc:source ?obs .
 }
-.`, { appendNewLineIfNotEmpty: true })}
-        `.appendNewLineIfNotEmpty();
-
-    if (!fs.existsSync(data.destination)) {
-        fs.mkdirSync(data.destination, { recursive: true });
-    }
-    fs.writeFileSync(generatedFilePath, toString(fileNode));
-    return generatedFilePath;
+.`;
 }
