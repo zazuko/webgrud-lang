@@ -1,6 +1,6 @@
 import type { Model, SourcedValue } from '../language/generated/ast.js';
-import { isSourcedValue } from '../language/generated/ast.js';
-import { expandToNode, joinToNode, toString } from 'langium/generate';
+import { isSourcedValue, isStringEqualityCondition } from '../language/generated/ast.js';
+import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { extractDestinationAndName } from './cli-util.js';
@@ -20,6 +20,7 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix unit: <http://qudt.org/vocab/unit/> .
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
+
         
         ${joinToNode(model.values.filter(isSourcedValue), generateSourcedValue, { appendNewLineIfNotEmpty: true })}
     `;
@@ -31,11 +32,14 @@ export function generateN3(model: Model, filePath: string, destination: string |
     return generatedFilePath;
 }
 
-function generateSourcedValue(sourcedValue: SourcedValue): string {
-    return `
+function generateSourcedValue(sourcedValue: SourcedValue): Generated {
+    return expandToNode`
 {
     <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
     ?obs <${sourcedValue.cube.ref?.name}/${sourcedValue.resultDimension.ref?.name}> ?${sourcedValue.resultDimension.ref?.name} .
+    ${joinToNode(sourcedValue.conditions.filter(isStringEqualityCondition),
+        condition => `?obs <${sourcedValue.cube.ref?.name}/${condition.dimension.ref?.name}> "${condition.stringValue}" .`,
+        { appendNewLineIfNotEmpty: true })}
 }
 =>
 {
@@ -44,5 +48,6 @@ function generateSourcedValue(sourcedValue: SourcedValue): string {
         qudt:unit ${sourcedValue.resultDimension.ref?.unit?.ref?.prefixedName} ;
         calc:source ?obs .
 }
-.`;
+.
+`.appendNewLine();
 }

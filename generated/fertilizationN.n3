@@ -26,6 +26,7 @@
 {
     <PRIFm8t9a/4> cube:observationSet [ cube:observation ?obs ] .
     ?obs <PRIFm8t9a/referenceyielddtha> ?referenceyielddtha .
+    ?obs <PRIFm8t9a/producttype> "mainProduct" .
 }
 =>
 {
@@ -74,3 +75,4 @@
         calc:source ?obs .
 }
 .
+
