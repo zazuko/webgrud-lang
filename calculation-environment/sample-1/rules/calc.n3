@@ -1,0 +1,114 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix calc: <https://agriculture.ld.admin.ch/prif/calc#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+{
+    ?calc a calc:Sum .
+
+    ( { ?calc calc:summand ?summand } { ?summand rdf:value [] } ) log:forAllIn [] . 
+
+    ( ?summand {
+        ?calc calc:summand [ rdf:value ?summand ]
+    } ?summands ) log:collectAllIn [] .
+    ?summands math:sum ?sum .
+}
+=>
+{
+    ?calc rdf:value ?sum
+}
+.
+
+{
+    ?calc a calc:Difference ;
+        calc:minuend [ rdf:value ?minuend ] ;
+        calc:subtrahend [ rdf:value ?subtrahend ] .
+
+    (?minuend ?subtrahend) math:difference ?difference .
+
+} 
+=> 
+{
+    ?calc rdf:value ?difference
+} .
+
+{
+    ?calc a calc:Product .
+
+    ( { ?calc calc:factor ?factor } { ?factor rdf:value [] } ) log:forAllIn [] . 
+
+    ( ?factor {
+        ?calc calc:factor [ rdf:value ?factor ]
+    } ?factors ) log:collectAllIn [] .
+    ?factors math:product ?product .
+}
+=>
+{
+    ?calc rdf:value ?product
+}
+.
+
+{
+    ?calc a calc:Sum ;
+        calc:summand [ qudt:unit ?unit ] 
+}
+=>
+{
+    ?calc qudt:unit ?unit
+}
+.
+
+{
+    ?calc a calc:Difference ;
+        calc:minuend [ qudt:unit ?unit ] 
+}
+=>
+{
+    ?calc qudt:unit ?unit
+}
+.
+
+{
+    ?calc a calc:Difference ;
+        calc:subtrahend [ qudt:unit ?unit ] 
+}
+=>
+{
+    ?calc qudt:unit ?unit
+}
+.
+
+# error propagation
+{ 
+    ?calc a calc:Sum ; calc:summand [ calc:error ?error ]
+}
+=> 
+{
+    ?calc calc:error ?error
+}.
+
+{ 
+    ?calc a calc:Product ; calc:factor [ calc:error ?error ]
+}
+=> 
+{
+    ?calc calc:error ?error
+}.
+
+{ 
+    ?calc a calc:Difference ; calc:minuend [ calc:error ?error ]
+}
+=> 
+{
+    ?calc calc:error ?error
+}.
+
+{ 
+    ?calc a calc:Difference ; calc:subtrahend [ calc:error ?error ]
+}
+=> 
+{
+    ?calc calc:error ?error
+}.

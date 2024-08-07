@@ -11,6 +11,30 @@
 
 
 {
+    ?request a :Request ; :nutrient ?nutrient .
+}
+=>
+{
+    ?request :fertilization [
+        :nutrient ?nutrient ;
+        calc:label "suggested fertilization" ;
+        a calc:Sum ;
+        calc:summand 
+            :fertilizationNorm, 
+            :correctionTargetYield,
+            :correctionT13,
+            :correctionT15
+    ] .
+}
+.
+
+
+### above this line: hardcoded rules that are not yet generated from the model
+### --------------------------------------------------------------------------
+### below this line: rules that are generated from the model
+
+
+{
     <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .
     ?obs <PRIFm8t9c/fertilizationnormkgha> ?fertilizationnormkgha .
 }
@@ -85,3 +109,16 @@
         calc:note "no correction value available" .
 }
 .
+{
+    <PRIFm8t15/2> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <PRIFm8t15/correctionvalue> ?correctionvalue .
+}
+=>
+{
+    :correctionT15
+        rdf:value ?correctionvalue ;
+        qudt:unit unit:KiloGM-PER-HA ;
+        calc:source ?obs .
+}
+.
+

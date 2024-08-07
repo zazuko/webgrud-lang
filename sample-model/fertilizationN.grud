@@ -18,7 +18,7 @@ value fertilizationNorm =
 value referenceYield =
     from table PRIFm8t9a
     where crop is input crop
-    and producttype is "mainProduct"
+        and producttype is "mainProduct"
     take referenceyielddtha
 
 value maxTargetYield =
@@ -59,15 +59,15 @@ value correctionT13 =
     take correctionfactormean
     default 0
 
-value correctionT15 = undefined
-// TODO: the following is not yet supported in this DSL -- path-like notation when the input has a nested structure
-/*
+value correctionT15 = 
     from table PRIFm8t15
     where crop is input crop
+// TODO: the following is not yet supported in this DSL -- path-like notation when the input has a nested structure
+/*
         and periodofprecipitation is input precipitation/period
         and precipitation-intensity is input precipitation/intensity
-    take correctionvalue
 */
+    take correctionvalue
 
 value availableN = undefined
 // TODO: the following is not yet supported in this DSL -- The definition of a value can be a complex, nested calculation containing nested definitions of other values

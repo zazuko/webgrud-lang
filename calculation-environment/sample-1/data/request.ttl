@@ -1,0 +1,30 @@
+@prefix prif: <https://agriculture.ld.admin.ch/prif/>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+[] rdf:type prif:Request;
+    prif:nutrient <https://ld.admin.ch/vocabulary/chemicalElements/n>;
+    prif:crop <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize>;
+    prif:targetYield [ rdf:value "160.0"^^xsd:decimal ; qudt:unit unit:DeciTONNE-PER-HA ] ;
+    prif:contentOfHumus "2.4"^^xsd:decimal;
+    prif:clayPercentage "31.0"^^xsd:decimal;
+    
+    prif:preCrop <https://ld.admin.ch/cube/dimension/agroscopeCrops/greenManureLegumes>;
+    prif:seasonincorporation <https://ld.admin.ch/cube/dimension/season/spring>;
+    prif:seasonsowing <https://ld.admin.ch/cube/dimension/season/spring>;
+    prif:specification <https://agriculture.ld.admin.ch/agroscope/PRIFm8t13/3/Specifications/notSpecified>;
+    
+    prif:precipitation [
+        prif:period <https://ld.admin.ch/cube/dimension/season/spring>;
+        prif:intensity <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high>;
+    ] ;
+
+    prif:organicfertilizer [
+        prif:fertilizerType <https://ld.admin.ch/cube/dimension/organicFertilizer/fullSlurryCattle>;
+        prif:nutrientForm "total";
+        prif:fertilizerAmount [ rdf:value "150.0"^^xsd:decimal ; qudt:unit unit:M3-PER-HA ] ;
+    ] ;
+
+.

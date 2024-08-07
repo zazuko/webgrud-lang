@@ -50,10 +50,11 @@ table PRIFm8t13 {
 
 // from PRIFm8t15 we get the correction value for the input crop and the input time and intesity of rainfall
 table PRIFm8t15 {
-  version 1
+  version 2
   dimension correctionvalue {
     unit KiloGM_PER_HA
   }
+  dimension crop
 }
 
 // removal

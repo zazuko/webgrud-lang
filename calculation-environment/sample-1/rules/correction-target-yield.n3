@@ -1,0 +1,61 @@
+@base <https://agriculture.ld.admin.ch/agroscope/> .
+@prefix : <https://agriculture.ld.admin.ch/prif/> .
+@prefix calc: <https://agriculture.ld.admin.ch/prif/calc#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix cube: <https://cube.link/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+
+
+# calculate the correction for target yield
+{ 
+    [] a :Request ; :targetYield [ 
+        rdf:value ?value ;
+        qudt:unit ?unit
+    ]
+}
+=>
+{
+    :targetYield 
+        calc:label "target yield" ;
+        rdf:value ?value ;
+        qudt:unit ?unit ;
+}
+.
+
+{
+    :maxTargetYield rdf:value ?maxtargetyielddtha .
+    :targetYield rdf:value [ math:lessThan ?maxtargetyielddtha ] .   
+}
+=>
+{
+    :correctionTargetYield a calc:Product ;
+        qudt:unit unit:KiloGM-PER-HA ;
+        calc:note "target yield less than max target yield" ;
+        calc:factor 
+            [ a calc:Difference ; 
+                calc:minuend :targetYield ; 
+                calc:subtrahend :referenceYield ] , 
+            :correctionT11 .
+}
+.
+
+{
+    :maxTargetYield rdf:value ?maxtargetyielddtha .
+    :targetYield rdf:value [ math:notLessThan ?maxtargetyielddtha ] .
+}
+=>
+{
+    :correctionTargetYield a calc:Product ;
+        qudt:unit unit:KiloGM-PER-HA ;
+        calc:note "target yield is greater than (or equal to) max target yield" ;
+        calc:factor 
+            [ a calc:Difference ; 
+                calc:minuend :maxTargetYield ; 
+                calc:subtrahend :referenceYield ] , 
+            :correctionT11 .
+}
+.

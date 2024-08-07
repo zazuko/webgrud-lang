@@ -21,7 +21,31 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
 
-        
+
+        {
+            ?request a :Request ; :nutrient ?nutrient .
+        }
+        =>
+        {
+            ?request :fertilization [
+                :nutrient ?nutrient ;
+                calc:label "suggested fertilization" ;
+                a calc:Sum ;
+                calc:summand 
+                    :fertilizationNorm, 
+                    :correctionTargetYield,
+                    :correctionT13,
+                    :correctionT15
+            ] .
+        }
+        .
+
+
+        ### above this line: hardcoded rules that are not yet generated from the model
+        ### --------------------------------------------------------------------------
+        ### below this line: rules that are generated from the model
+
+
         ${joinToNode(model.values.filter(isSourcedValue), generateSourcedValue, { appendNewLineIfNotEmpty: true })}
     `;
 

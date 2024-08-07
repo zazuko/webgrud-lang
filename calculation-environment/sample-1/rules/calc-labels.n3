@@ -1,0 +1,20 @@
+@base <https://agriculture.ld.admin.ch/agroscope/> .
+@prefix : <https://agriculture.ld.admin.ch/prif/> .
+@prefix calc: <https://agriculture.ld.admin.ch/prif/calc#> .
+@prefix log: <http://www.w3.org/2000/10/swap/log#> .
+@prefix math: <http://www.w3.org/2000/10/swap/math#> .
+@prefix cube: <https://cube.link/> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix schema: <http://schema.org/> .
+
+:fertilizationNorm calc:label "fertilization norm *gen" .
+:correctionTargetYield calc:label "correction (target yield)" .
+:correctionT12 calc:label "correction (soil)" .
+:correctionT13 calc:label "correction (prev. crop) *gen" .
+:correctionT15 calc:label "correction (rainfall) *gen" .
+
+:referenceYield calc:label "reference yield *gen" .
+:maxTargetYield calc:label "max target yield *gen" .
+:correctionT11  calc:label "correction (target yield) *gen" .

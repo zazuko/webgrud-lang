@@ -1,0 +1,208 @@
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/content> "3.9"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient-form> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/organicfertilizer> <https://ld.admin.ch/cube/dimension/organicFertilizer/fullSlurryCattle> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient> <https://ld.admin.ch/vocabulary/chemicalElements/n> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> <http://schema.org/name> "totale"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> <http://schema.org/name> "total"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> <http://schema.org/name> "total"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> <http://schema.org/name> "gesamt"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> <http://schema.org/identifier> "total" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/total> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/Nutrientform/total> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/content> "2.1"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient-form> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/organicfertilizer> <https://ld.admin.ch/cube/dimension/organicFertilizer/fullSlurryCattle> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient> <https://ld.admin.ch/vocabulary/chemicalElements/n> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> <http://schema.org/name> "soluble"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> <http://schema.org/name> "solubile"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> <http://schema.org/name> "soluble"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> <http://schema.org/name> "löslich"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> <http://schema.org/identifier> "soluble" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/soluble> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/Nutrientform/soluble> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/content> "2.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient-form> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/organicfertilizer> <https://ld.admin.ch/cube/dimension/organicFertilizer/fullSlurryCattle> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient> <https://ld.admin.ch/vocabulary/chemicalElements/n> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> <http://schema.org/name> "verfügbar, Minimum"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> <http://schema.org/name> "disponible, minimum"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> <http://schema.org/name> "available, minimum"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> <http://schema.org/name> "disponibile, minimo"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> <http://schema.org/identifier> "availableMin" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMin> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/Nutrientform/availableMin> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/content> "2.7"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient-form> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/organicfertilizer> <https://ld.admin.ch/cube/dimension/organicFertilizer/fullSlurryCattle> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/nutrient> <https://ld.admin.ch/vocabulary/chemicalElements/n> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> <http://schema.org/name> "disponibile, massimo"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> <http://schema.org/name> "disponible, maximum"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> <http://schema.org/name> "available, maximum"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> <http://schema.org/name> "verfügbar, Maximum"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> <http://schema.org/identifier> "availableMax" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/Nutrientform/availableMax> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/Nutrientform/availableMax> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/mainProduct> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/mainProduct> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/mainProduct> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/producttype> "mainProduct" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/mainProduct> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/crop> <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/mainProduct> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/referenceyielddtha> "185.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/byProduct> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/byProduct> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/byProduct> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/producttype> "byProduct" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/byProduct> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/crop> <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/byProduct> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/referenceyielddtha> "0.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/totalHarvestedBiomass> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/totalHarvestedBiomass> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/totalHarvestedBiomass> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/producttype> "totalHarvestedBiomass" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/totalHarvestedBiomass> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/crop> <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/totalHarvestedBiomass> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/referenceyielddtha> "185.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/silageMaize/nitrogen> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/silageMaize/nitrogen> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/silageMaize/nitrogen> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/nutrient> <https://ld.admin.ch/vocabulary/chemicalElements/n> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/silageMaize/nitrogen> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/fertilizationnormkgha> "110.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/silageMaize/nitrogen> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/crop> <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/silageMaize/185> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/silageMaize/185> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/silageMaize/185> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/correctiontargetyieldkgdt> "0.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/silageMaize/185> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/maxtargetyielddtha> "185.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/silageMaize/185> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/crop> <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/mineralisation-potential-om> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/correctionvalue> "-60.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/organicmattercontentpercmin> "10.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/claycontentpercmin> "30.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> <http://schema.org/name> "high to very high"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> <http://schema.org/name> "hoch bis sehr hoch"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> <http://schema.org/name> "Elevé à très élevé"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> <http://schema.org/name> "Da elevato a molto elevato"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> <http://schema.org/identifier> "highVeryHigh" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/highVeryHigh> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/MineralisationpotentialOM/highVeryHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/mineralisation-potential-om> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/correctionvalue> "-100.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/organicmattercontentpercmin> "20.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/claycontentpercmin> "30.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> <http://schema.org/name> "very high"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> <http://schema.org/name> "sehr hoch"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> <http://schema.org/name> "Très élevé"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> <http://schema.org/name> "Molto elevato"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> <http://schema.org/identifier> "veryHigh" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/veryHigh> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/MineralisationpotentialOM/veryHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/mineralisation-potential-om> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/correctionvalue> "0.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/organicmattercontentpercmin> "2.5"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/claycontentpercmin> "30.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> <http://schema.org/name> "Medio"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> <http://schema.org/name> "mittel"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> <http://schema.org/name> "medium"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> <http://schema.org/name> "Moyen"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> <http://schema.org/identifier> "medium" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/medium> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/MineralisationpotentialOM/medium> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/mineralisation-potential-om> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/correctionvalue> "20.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/organicmattercontentpercmin> "0.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/claycontentpercmin> "30.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> <http://schema.org/name> "low to medium"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> <http://schema.org/name> "schwach bis mittel"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> <http://schema.org/name> "Faible à moyen"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> <http://schema.org/name> "Da scarso a medio"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> <http://schema.org/identifier> "lowMedium" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/lowMedium> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/MineralisationpotentialOM/lowMedium> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/mineralisation-potential-om> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/correctionvalue> "-20.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/organicmattercontentpercmin> "6.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/claycontentpercmin> "30.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> <http://schema.org/name> "medium to high"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> <http://schema.org/name> "mittel bis hoch"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> <http://schema.org/name> "Moyen à élevé"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> <http://schema.org/name> "Da medio a elevato"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> <http://schema.org/identifier> "mediumHigh" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/MineralisationpotentialOM/mediumHigh> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/MineralisationpotentialOM/mediumHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/fullSlurryCattle> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/fullSlurryCattle> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/fullSlurryCattle> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/percentaccountablen> "10.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/fullSlurryCattle> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/organicfertilizer> <https://ld.admin.ch/cube/dimension/organicFertilizer/fullSlurryCattle> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://cube.link/Observation> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> <https://cube.link/observedBy> <https://register.ld.admin.ch/staatskalender/organization/10003634> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/precipitation-intensity> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/crop> <https://ld.admin.ch/cube/dimension/agroscopeCrops/silageMaize> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/periodofprecipitation> <https://ld.admin.ch/cube/dimension/season/spring> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/correctionvalue> "30.0"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> <http://schema.org/name> "elevato (> 90 mm)"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> <http://schema.org/name> "high (> 90 mm)"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> <http://schema.org/name> "élevé (> 90 mm)"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> <http://schema.org/name> "hoch (> 90 mm)"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> <http://schema.org/identifier> "high" .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/Precipitationintensity/high> <http://schema.org/sameAs> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/Precipitationintensity/high> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6m/2> <http://schema.org/name> "Standard values for the nutrient content of solid organic fertilizers (manure) of different types of livestock (stable housing)"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6m/2> <http://schema.org/name> "Richtwerte der Gehalte an Nährstoffen von festen Hofdüngern (Mist) verschiedener Nutztierarten bei Stallhaltung"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6m/2> <http://schema.org/name> "Teneurs indicatives en éléments nutritifs des engrais de ferme solides (fumier) pour différentes espèces d’animaux de rente en stabulation"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6m/2> <http://schema.org/name> "Tenori di riferimento in elementi nutritivi dei concimi solidi aziendali (letame) prodotti da diverse specie di animali da reddito stabulate"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2> <http://schema.org/name> "Standard values for the nutrient content of liquid organic fertilizers (slurry) of different types of livestock (stable housing)"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2> <http://schema.org/name> "Richtwerte der Gehalte an Nährstoffen von flüssigen Hofdüngern (Gülle) verschiedener Nutztierarten bei Stallhaltung"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2> <http://schema.org/name> "Teneurs indicatives en éléments nutritifs des engrais de ferme liquides (lisier) pour différentes espèces d’animaux de rente en stabulation"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2> <http://schema.org/name> "Tenori di riferimento in elementi nutritivi dei concimi liquido aziendali (liquame) prodotti da diverse specie di animali da reddito stabulate"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/total> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/soluble> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMin> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm4t6s/2/observation/fullSlurryCattle/nitrogen/availableMax> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4> <http://schema.org/name> "Reference yield of arable crops"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4> <http://schema.org/name> "Referenzertrag von Ackerkulturen"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4> <http://schema.org/name> "Rendement de référence des grandes cultures"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4> <http://schema.org/name> "Resa di riferimento dei seminativi "@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/mainProduct> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/byProduct> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9a/4/observation/silageMaize/totalHarvestedBiomass> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3> <http://schema.org/name> "N, P, K, Mg fertilization norm for arable crops"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3> <http://schema.org/name> "N, P, K, Mg Düngenorm für Ackerkulturen"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3> <http://schema.org/name> "Normes de fertilisation N, P, K, Mg pour les grandes cultures"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3> <http://schema.org/name> "Norma di fertilizzazione N, P, K, Mg per i seminativi"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t9c/3/observation/silageMaize/nitrogen> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1> <http://schema.org/name> "Correzione della concimazione N qualora l’obiettivo di resa differisca dalla resa di riferimento"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1> <http://schema.org/name> "Correction de la fertilisation N lorsque le rendement cible diffère du rendement moyen de référence"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1> <http://schema.org/name> "Correction of N fertilisation for a target yield that deviates from the average yield (reference yield)"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1> <http://schema.org/name> "Korrektur der N-Düngung bei einem Zielertrag, der vom Durchschnittsertrag (Referenzertrag) abweicht"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t11/1/observation/silageMaize/185> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2> <http://schema.org/name> "Correction of N fertilisation depending on the mineralisation potential of the organic matter (OM)"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2> <http://schema.org/name> "Korrektur der Stickstoffdüngung in Abhängigkeit des Mineralisierungspotenzials der organischen Substanz (OS)"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2> <http://schema.org/name> "Correction de la fertilisation N en fonction du potentiel de minéralisation de la matière organique (MO)"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2> <http://schema.org/name> "Correzione della concimazione N in funzione del potenziale di mineralizzazione della sostanza organica (SO)"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/10/highVeryHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/20/veryHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/2.5/medium> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/0/lowMedium> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t12/2/observation/30/6/mediumHigh> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t13/3> <http://schema.org/name> "Correction of nitrogen fertilization depending on pre-crop"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t13/3> <http://schema.org/name> "Korrektur der Stickstoffdüngung in Abhängigkeit der Vorkultur"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t13/3> <http://schema.org/name> "Correction de la fertilisation N en fonction du précédent cultural"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t13/3> <http://schema.org/name> "Correzione della concimazione N in funzione del precedente colturale"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2> <http://schema.org/name> "Correction de la fertilisation N en fonction des arrière-effets des apports d’engrais organiques"@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2> <http://schema.org/name> "Correzione della concimazione N in funzione dell'effetto residuo degli apporti di concimi organici"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2> <http://schema.org/name> "Korrektur der N-Normdüngung infolge Nachwirkung organischer Dünger"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2> <http://schema.org/name> "Correction of N fertilization norm due to the legacy effect of organic fertilizers"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t14/2/observation/fullSlurryCattle> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2> <http://schema.org/name> "Korrektur der Stickstoff-Normdüngung in Abhängigkeit der Winter- und Frühjahrsniederschläge"@de .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2> <http://schema.org/name> "Correction of N fertilization norm by winter and spring precipitation"@en .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2> <http://schema.org/name> "Correction de la fertilisation N en fonction des pluies d’hiver et de printemps."@fr .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2> <http://schema.org/name> "Correzione della concimazione N in funzione delle precipitazioni invernali e primaverili"@it .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2> <https://cube.link/observationSet> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/> .
+<https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/> <https://cube.link/observation> <https://agriculture.ld.admin.ch/agroscope/PRIFm8t15/2/observation/silageMaize/spring/high> .
