@@ -10,54 +10,48 @@
 @prefix schema: <http://schema.org/> .
 
 {
-    <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm8t9c/fertilizationnormkgha> ?fertilizationnormkgha .
+   
 }
 =>
 {
-    :fertilizationNorm
-        rdf:value ?fertilizationnormkgha ;
-        qudt:unit unit:KiloGM-PER-HA ;
-        calc:source ?obs .
-}
-.
-
-{
-    <PRIFm8t9a/4> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <PRIFm8t9a/referenceyielddtha> ?referenceyielddtha .
-    ?obs <PRIFm8t9a/producttype> "mainProduct" .
-}
-=>
-{
-    :referenceYield
-        rdf:value ?referenceyielddtha ;
-        qudt:unit unit:DeciTONNE-PER-HA ;
-        calc:source ?obs .
-}
-.
-
-{ } => {
     :test a calc:Sum ; 
         calc:summand :fertilizationNorm, :referenceYield ;
 } .
 
 {
-    # TODO actual condition
+   <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .
+   ?obs <PRIFm8t9c/fertilizationnormkgha> ?fertilizationNorm .
 }
 =>
 {
-    :result 
-        rdf:value ?result ;
-        calc:condition "cond1" .
+    :fertilizationNorm
+        rdf:value ?fertilizationNorm ;
+        qudt:unit unit:KiloGM-PER-HA ;
+        calc:source ?obs .
 } .
 
 {
-    [] log:notIncludes { :result calc:condition "cond1" } .
-    # TODO actual condition
+   <PRIFm8t9a/4> cube:observationSet [ cube:observation ?obs ] .
+   ?obs <PRIFm8t9a/referenceyielddtha> ?referenceYield .
+   ?obs <PRIFm8t9a/producttype> "mainProduct" .
 }
 =>
 {
-    :result 
-        rdf:value ?result ;
-        calc:condition "cond2" .
+    :referenceYield
+        rdf:value ?referenceYield ;
+        qudt:unit unit:DeciTONNE-PER-HA ;
+        calc:source ?obs .
 } .
+
+{
+}
+=>
+{
+} .
+
+{
+}
+=>
+{
+} .
+

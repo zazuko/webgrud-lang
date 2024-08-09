@@ -1,7 +1,7 @@
 grammar WebGrudDefinitions
 
 entry Model:
-    (cubes+=Cube | units+=Unit | factors+=Factor | values+=Value | inputParameters+=InputParameter | nutrients+=Nutrient)*;
+    (cubes+=Cube | units+=Unit | factors+=Factor | values+=ValueDefinition | inputParameters+=InputParameter | nutrients+=Nutrient)*;
 
 Cube:
     'table' name=ID '{'
@@ -24,34 +24,32 @@ Factor:
         'label' label=STRING
     '}';
 
+ValueDefinition:
+    'value' name=ID '=' value=Value;
+
 Value:
-    FormulaValue | SourcedValue | SumValue | ConditionalValue | UndefinedValue;
+    SourcedValue | SumValue | ConditionalValue | UNDEFINED;
 
 ConditionalBranch:
-    'if' name=ID '{' value=[Value:ID] '}' ;
+    'if' name=ID '{' value=[ValueDefinition:ID] '}' ;
 
 ConditionalValue:
-    'value' name=ID '='
-        (conditions+=ConditionalBranch)*;
+    (conditions+=ConditionalBranch)+;
 
 SumValue:
-    'value' name=ID '='
-        summands+=[Value:ID] ('+' summands+=[Value:ID])*;
+    summands+=[ValueDefinition:ID] ('+' summands+=[ValueDefinition:ID])*;
 
-FormulaValue:
-    'calculation' name=ID '='
-        summands+=[Value:ID] ('+' summands+=[Value:ID])*;
+// FormulaValue:
+//     'calculation' name=ID '='
+//         summands+=[Value:ID] ('+' summands+=[Value:ID])*;
 
 SourcedValue:
-    'value' name=ID '='
-        'from' 'table' cube=[Cube:ID]
-        'where' conditions+=Condition
-        ('and' conditions+=Condition)*
-        'take' resultDimension=[Dimension:ID]
-        ('default' defaultValue=INT)?;
+    'from' 'table' cube=[Cube:ID]
+    'where' conditions+=Condition
+    ('and' conditions+=Condition)*
+    'take' resultDimension=[Dimension:ID]
+    ('default' defaultValue=INT)?;
 
-UndefinedValue:
-    'value' name=ID '=' 'undefined';
 
 Condition:
     NutrientEqualityCondition | StringEqualityCondition | InputEqualityCondition;
@@ -73,6 +71,7 @@ Nutrient:
     'nutrient' name=ID;
 
 hidden terminal WS: /\s+/;
+terminal UNDEFINED: 'undefined';
 terminal ID: /[_a-zA-Z][\w_]*/;
 terminal INT returns number: /[0-9]+/;
 terminal STRING: /"(\\.|[^"\\])*"|'(\\.|[^'\\])*'/;

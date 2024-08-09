@@ -32,7 +32,7 @@ export class WebGrudDefinitionsScopeComputation extends DefaultScopeComputation 
             }
         }
 
-        for (const sourcedValue of model.values.filter(isSourcedValue)) {
+        for (const sourcedValue of model.values.map(x => x.value).filter(isSourcedValue)) {
             await interruptAndCheck(cancelToken);
 
             if (sourcedValue.cube?.ref) {

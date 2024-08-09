@@ -1,6 +1,6 @@
-import type { Model, SourcedValue, SumValue, ConditionalValue, ConditionalBranch } from '../language/generated/ast.js';
-import { isSourcedValue, isSumValue, isConditionalValue, isStringEqualityCondition } from '../language/generated/ast.js';
-import { type Generated, expandToNode, joinToNode, toString, expandToString } from 'langium/generate';
+import type { Model, ValueDefinition, SourcedValue, SumValue, ConditionalValue } from '../language/generated/ast.js';
+import { isValueDefinition, isSourcedValue, isSumValue, isConditionalValue, isStringEqualityCondition } from '../language/generated/ast.js';
+import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { extractDestinationAndName } from './cli-util.js';
@@ -21,9 +21,7 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
 
-        ${joinToNode(model.values.filter(isSourcedValue), generateSourcedValue, { appendNewLineIfNotEmpty: true })}
-        ${joinToNode(model.values.filter(isSumValue), generateSumValue, { appendNewLineIfNotEmpty: true })}
-        ${joinToNode(model.values.filter(isConditionalValue), generateConditionalValue, { appendNewLineIfNotEmpty: true })}
+        ${joinToNode(model.values.filter(isValueDefinition), generateValueDefinition, { appendNewLineIfNotEmpty: true })}
 
     `;
 
@@ -34,69 +32,111 @@ export function generateN3(model: Model, filePath: string, destination: string |
     return generatedFilePath;
 }
 
+function generateValueDefinition(value: ValueDefinition): Generated {
+    let antecedent, consequent;
+    if (isSourcedValue(value.value)) {
+        antecedent = generateSourcedValueAntecedent(value.value, value.name)
+        consequent = generateSourcedValueConsequent(value.value, value.name)
+        // todo maybeDefaultValue
+    }
+    else if (isSumValue(value.value)) { 
+        antecedent = ''
+        consequent = generateSumValue(value.value, value.name)
+    }
+    else if (isConditionalValue(value.value)) {
 
-function generateSumValue(sumValue: SumValue): Generated {
+    }
+
     return expandToNode`
-    { } => {
-        :${sumValue.name} a calc:Sum ; 
-            calc:summand ${joinToNode(sumValue.summands, summand => `:${summand.ref?.name}`, { separator: ', ' })} ;
+    {
+       ${antecedent}
+    }
+    =>
+    {
+        ${consequent}
     } .
-    
+    `.appendNewLineIfNotEmpty()
+        .appendNewLine();
+}
+
+function generateSumValue(sumValue: SumValue, name: string): Generated {
+    return expandToNode`
+    :${name} a calc:Sum ; 
+        calc:summand ${joinToNode(sumValue.summands, summand => `:${summand.ref?.name}`, { separator: ', ' })} ;
     `.appendNewLineIfNotEmpty();
 }
 
-function generateSourcedValue(sourcedValue: SourcedValue): Generated {
-    const maybeDefaultValue = sourcedValue.defaultValue !== undefined ? expandToString`
 
-        {
-            [] log:notIncludes { <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [] } .
-        }
-        =>
-        {
-            :${sourcedValue.name} rdf:value ${sourcedValue.defaultValue} ;
-                calc:note "no correction value available" .
-        }
-        .`
-        :'';
-
+function generateSourcedValueAntecedent(sourcedValue: SourcedValue, name: string): Generated {
     return expandToNode`
-{
     <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
-    ?obs <${sourcedValue.cube.ref?.name}/${sourcedValue.resultDimension.ref?.name}> ?${sourcedValue.resultDimension.ref?.name} .
+    ?obs <${sourcedValue.cube.ref?.name}/${sourcedValue.resultDimension.ref?.name}> ?${name} .
     ${joinToNode(sourcedValue.conditions.filter(isStringEqualityCondition),
-        condition => `?obs <${sourcedValue.cube.ref?.name}/${condition.dimension.ref?.name}> "${condition.stringValue}" .`,
-        { appendNewLineIfNotEmpty: true })}
+        condition => `?obs <${sourcedValue.cube.ref?.name}/${condition.dimension.ref?.name}> "${condition.stringValue}" .`)}
+        `.appendNewLineIfNotEmpty();
 }
-=>
-{
-    :${sourcedValue.name}
-        rdf:value ?${sourcedValue.resultDimension.ref?.name} ;
+
+function generateSourcedValueConsequent(sourcedValue: SourcedValue, name: string): Generated {
+    return expandToNode`
+    :${name}
+        rdf:value ?${name} ;
         qudt:unit ${sourcedValue.resultDimension.ref?.unit?.ref?.prefixedName} ;
         calc:source ?obs .
-}
-.
-${maybeDefaultValue}
-`.appendNewLineIfNotEmpty();
-}
-
-function generateConditionalValue(condValue: ConditionalValue): Generated {
-    return joinToNode(condValue.conditions, generateConditionalBranch, { separator: '\n' });
-}
-
-function generateConditionalBranch(branch: ConditionalBranch): Generated {
-    const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
-    const notIncludesPrev = (prev: ConditionalBranch) => 
-        `[] log:notIncludes { :${branch.$container.name} calc:condition "${prev.name}" } .`
-    return expandToNode`
-        {
-            ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
-            # TODO actual condition
-        }
-        =>
-        {
-            :${branch.$container.name} 
-                rdf:value ?${branch.$container.name} ;
-                calc:condition "${branch.name}" .
-        } .
     `.appendNewLineIfNotEmpty();
 }
+
+// function generateSourcedValue(sourcedValue: SourcedValue): Generated {
+//     const maybeDefaultValue = sourcedValue.defaultValue !== undefined ? expandToString`
+
+//         {
+//             [] log:notIncludes { <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [] } .
+//         }
+//         =>
+//         {
+//             :${sourcedValue.name} rdf:value ${sourcedValue.defaultValue} ;
+//                 calc:note "no correction value available" .
+//         }
+//         .`
+//         :'';
+
+//     return expandToNode`
+// {
+//     <${sourcedValue.cube.ref?.name}/${sourcedValue.cube.ref?.version}> cube:observationSet [ cube:observation ?obs ] .
+//     ?obs <${sourcedValue.cube.ref?.name}/${sourcedValue.resultDimension.ref?.name}> ?${sourcedValue.resultDimension.ref?.name} .
+//     ${joinToNode(sourcedValue.conditions.filter(isStringEqualityCondition),
+//         condition => `?obs <${sourcedValue.cube.ref?.name}/${condition.dimension.ref?.name}> "${condition.stringValue}" .`,
+//         { appendNewLineIfNotEmpty: true })}
+// }
+// =>
+// {
+//     :${sourcedValue.name}
+//         rdf:value ?${sourcedValue.resultDimension.ref?.name} ;
+//         qudt:unit ${sourcedValue.resultDimension.ref?.unit?.ref?.prefixedName} ;
+//         calc:source ?obs .
+// }
+// .
+// ${maybeDefaultValue}
+// `.appendNewLineIfNotEmpty();
+// }
+
+// function generateConditionalValue(condValue: ConditionalValue): Generated {
+//     return joinToNode(condValue.conditions, generateConditionalBranch, { separator: '\n' });
+// }
+
+// function generateConditionalBranch(branch: ConditionalBranch): Generated {
+//     const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
+//     const notIncludesPrev = (prev: ConditionalBranch) => 
+//         `[] log:notIncludes { :${branch.$container.name} calc:condition "${prev.name}" } .`
+//     return expandToNode`
+//         {
+//             ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
+//             # TODO actual condition
+//         }
+//         =>
+//         {
+//             :${branch.$container.name} 
+//                 rdf:value ?${branch.$container.name} ;
+//                 calc:condition "${branch.name}" .
+//         } .
+//     `.appendNewLineIfNotEmpty();
+// }
