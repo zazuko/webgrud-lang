@@ -1,5 +1,5 @@
-import type { Model, SourcedValue } from '../language/generated/ast.js';
-import { isSourcedValue, isStringEqualityCondition } from '../language/generated/ast.js';
+import type { Model, SourcedValue, SumValue, ConditionalValue, ConditionalBranch } from '../language/generated/ast.js';
+import { isSourcedValue, isSumValue, isConditionalValue, isStringEqualityCondition } from '../language/generated/ast.js';
 import { type Generated, expandToNode, joinToNode, toString, expandToString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -21,32 +21,10 @@ export function generateN3(model: Model, filePath: string, destination: string |
         @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
         @prefix schema: <http://schema.org/> .
 
-
-        {
-            ?request a :Request ; :nutrient ?nutrient .
-        }
-        =>
-        {
-            ?request :fertilization [
-                :nutrient ?nutrient ;
-                calc:label "suggested fertilization" ;
-                a calc:Sum ;
-                calc:summand 
-                    :fertilizationNorm, 
-                    :correctionTargetYield,
-                    :correctionT13,
-                    :correctionT15
-            ] .
-        }
-        .
-
-
-        ### above this line: hardcoded rules that are not yet generated from the model
-        ### --------------------------------------------------------------------------
-        ### below this line: rules that are generated from the model
-
-
         ${joinToNode(model.values.filter(isSourcedValue), generateSourcedValue, { appendNewLineIfNotEmpty: true })}
+        ${joinToNode(model.values.filter(isSumValue), generateSumValue, { appendNewLineIfNotEmpty: true })}
+        ${joinToNode(model.values.filter(isConditionalValue), generateConditionalValue, { appendNewLineIfNotEmpty: true })}
+
     `;
 
     if (!fs.existsSync(data.destination)) {
@@ -54,6 +32,17 @@ export function generateN3(model: Model, filePath: string, destination: string |
     }
     fs.writeFileSync(generatedFilePath, toString(fileNode));
     return generatedFilePath;
+}
+
+
+function generateSumValue(sumValue: SumValue): Generated {
+    return expandToNode`
+    { } => {
+        :${sumValue.name} a calc:Sum ; 
+            calc:summand ${joinToNode(sumValue.summands, summand => `:${summand.ref?.name}`, { separator: ', ' })} ;
+    } .
+    
+    `.appendNewLineIfNotEmpty();
 }
 
 function generateSourcedValue(sourcedValue: SourcedValue): Generated {
@@ -88,4 +77,26 @@ function generateSourcedValue(sourcedValue: SourcedValue): Generated {
 .
 ${maybeDefaultValue}
 `.appendNewLineIfNotEmpty();
+}
+
+function generateConditionalValue(condValue: ConditionalValue): Generated {
+    return joinToNode(condValue.conditions, generateConditionalBranch, { separator: '\n' });
+}
+
+function generateConditionalBranch(branch: ConditionalBranch): Generated {
+    const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
+    const notIncludesPrev = (prev: ConditionalBranch) => 
+        `[] log:notIncludes { :${branch.$container.name} calc:condition "${prev.name}" } .`
+    return expandToNode`
+        {
+            ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
+            # TODO actual condition
+        }
+        =>
+        {
+            :${branch.$container.name} 
+                rdf:value ?${branch.$container.name} ;
+                calc:condition "${branch.name}" .
+        } .
+    `.appendNewLineIfNotEmpty();
 }

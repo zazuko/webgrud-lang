@@ -1,13 +1,6 @@
-calculation fertilizationN =
-    fertilizationNorm + 
-       correctionTargetYield + 
-       correctionT12 + 
-       correctionT13 +
-       correctionT15
 
-// TODO: the following is not yet supported in this DSL -- Difference Operation
-    // - availableN
 
+value test = fertilizationNorm + referenceYield
 
 value fertilizationNorm =
     from table PRIFm8t9c
@@ -21,86 +14,13 @@ value referenceYield =
         and producttype is "mainProduct"
     take referenceyielddtha
 
-value maxTargetYield =
-    from table PRIFm8t11
-    where crop is input crop
-    take maxtargetyielddtha
+value aa = undefined
 
-value correctionT11 =
-    from table PRIFm8t11
-    where crop is input crop
-    take correctiontargetyieldkgdt
+value result =
+    if cond1 {
+        test
+    }
+    if cond2 {
+        aa
+    }
 
-value correctionTargetYield = undefined
-// TODO: the following is not yet supported in this DSL -- conditional expressions
-/*
-    if input targetYield < maxTargetYield
-    then (input targetYield - referenceYield) * correctionT11
-    
-    if input targetYield >= maxTargetYield
-    then (maxTargetYield - referenceYield) * correctionT11
-*/
-
-value correctionT12 = undefined
-// TODO: the following is not yet supported in this DSL -- Some key dimensions represent (the lower bound of) a range. We need to express range lookups
-/*
-    from table PRIFm8t12
-        where claycontentpercmin "has the max value less than" input clayPercentage
-            and organicmattercontentpercmin "has the max value less than" input contentOfHumus
-        take correctionvalue
-*/
-
-value correctionT13 =
-    from table PRIFm8t13
-    where precrop is input preCrop
-        and seasonincorporation is input seasonincorporation
-        and seasonsowingaftercrop is input seasonsowing
-        and specifications is input specification
-    take correctionfactormean
-    default 0
-
-value correctionT15 = 
-    from table PRIFm8t15
-    where crop is input crop
-// TODO: the following is not yet supported in this DSL -- path-like notation when the input has a nested structure
-/*
-        and periodofprecipitation is input precipitation/period
-        and precipitation-intensity is input precipitation/intensity
-*/
-    take correctionvalue
-
-value availableN = undefined
-// TODO: the following is not yet supported in this DSL -- The definition of a value can be a complex, nested calculation containing nested definitions of other values
-/*
-    if input without organicfertilizer
-    then 0
-
-    fertilizerNutrientContent =
-        if input organicfertilizer/fertilizerNutrientContent has value
-        then input organicfertilizer/fertilizerNutrientContent
-
-        if unit of input organicfertilizer/fertilizerAmount is M3-PER-HA
-        then
-            from table PRIFm4t6s2
-            where  nutrient is N
-                and  organicfertilizer is input organicfertilizer/fertilizerType
-                and  nutrient-form is input organicfertilizer/nutrientForm
-            take content
-
-        if unit of input organicfertilizer/fertilizerAmount is TONNE-PER-HA
-        then
-            from table PRIFm4t6m
-            where nutrient is N
-            and organicfertilizer is input organicfertilizer/fertilizerType (optional)
-            and nutrient-form is input organicfertilizer/nutrientForm
-            take content
-
-    percentaccountablen =
-        from table PRIFm8t14
-        where organicfertilizer is input organicfertilizer/fertilizerType
-        take percentaccountablen
-
-    if fertilizerNutrientContent has value
-        and percentaccountablen has value
-    then input organicfertilizer/fertilizerAmount * fertilizerNutrientContent * (percentaccountablen/100)
-*/

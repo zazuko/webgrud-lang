@@ -25,7 +25,18 @@ Factor:
     '}';
 
 Value:
-    FormulaValue | SourcedValue | UndefinedValue;
+    FormulaValue | SourcedValue | SumValue | ConditionalValue | UndefinedValue;
+
+ConditionalBranch:
+    'if' name=ID '{' value=[Value:ID] '}' ;
+
+ConditionalValue:
+    'value' name=ID '='
+        (conditions+=ConditionalBranch)*;
+
+SumValue:
+    'value' name=ID '='
+        summands+=[Value:ID] ('+' summands+=[Value:ID])*;
 
 FormulaValue:
     'calculation' name=ID '='
