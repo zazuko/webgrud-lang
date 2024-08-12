@@ -10,17 +10,21 @@
 @prefix schema: <http://schema.org/> .
 
 {
-   
+    
+        :fertilizationNorm rdf:value ?fertilizationNorm .
+
+        :referenceYield rdf:value ?referenceYield .
+    (?fertilizationNorm ?referenceYield ) math:sum ?test .
 }
 =>
 {
-    :test a calc:Sum ; 
-        calc:summand :fertilizationNorm, :referenceYield ;
+    :test rdf:value ?test ;
+        a calc:Sum ;
+        calc:summand :fertilizationNorm, :referenceYield .
 } .
-
 {
-   <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .
-   ?obs <PRIFm8t9c/fertilizationnormkgha> ?fertilizationNorm .
+    <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <PRIFm8t9c/fertilizationnormkgha> ?fertilizationNorm .
 }
 =>
 {
@@ -29,11 +33,10 @@
         qudt:unit unit:KiloGM-PER-HA ;
         calc:source ?obs .
 } .
-
 {
-   <PRIFm8t9a/4> cube:observationSet [ cube:observation ?obs ] .
-   ?obs <PRIFm8t9a/referenceyielddtha> ?referenceYield .
-   ?obs <PRIFm8t9a/producttype> "mainProduct" .
+    <PRIFm8t9a/4> cube:observationSet [ cube:observation ?obs ] .
+    ?obs <PRIFm8t9a/referenceyielddtha> ?referenceYield .
+    ?obs <PRIFm8t9a/producttype> "mainProduct" .
 }
 =>
 {
@@ -42,16 +45,27 @@
         qudt:unit unit:DeciTONNE-PER-HA ;
         calc:source ?obs .
 } .
-
 {
+    
+        :test rdf:value ?test .
+
+        :aa rdf:value ?aa .
+    (?test ?aa ) math:sum ?result .
 }
 =>
 {
+    :result calc:condition "cond1" .
+    :result rdf:value ?result ;
+        a calc:Sum ;
+        calc:summand :test, :aa .
 } .
 
 {
+    [] log:notIncludes { :result calc:condition "cond1" } .
+    :aa rdf:value ?aa ;
 }
 =>
 {
+    :result calc:condition "cond2" .
+    :result rdf:value ?aa .
 } .
-

@@ -18,7 +18,7 @@ value aa = undefined
 
 value result =
     if cond1 {
-        test
+        test + aa
     }
     if cond2 {
         aa

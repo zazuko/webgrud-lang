@@ -25,19 +25,20 @@ Factor:
     '}';
 
 ValueDefinition:
-    'value' name=ID '=' value=Value;
+    'value' name=ID '=' value=(Value | ConditionalValue);
 
 Value:
-    SourcedValue | SumValue | ConditionalValue | UNDEFINED;
-
-ConditionalBranch:
-    'if' name=ID '{' value=[ValueDefinition:ID] '}' ;
+    UNDEFINED | SourcedValue | SumValue |definition=[ValueDefinition:ID];
 
 ConditionalValue:
     (conditions+=ConditionalBranch)+;
 
+ConditionalBranch:
+    'if' name=ID '{' value=Value '}' ;
+
+
 SumValue:
-    summands+=[ValueDefinition:ID] ('+' summands+=[ValueDefinition:ID])*;
+    summands+=[ValueDefinition:ID] ('+' summands+=[ValueDefinition:ID])+;
 
 // FormulaValue:
 //     'calculation' name=ID '='

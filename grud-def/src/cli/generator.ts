@@ -1,4 +1,4 @@
-import type { Model, ValueDefinition, SourcedValue, SumValue, ConditionalValue } from '../language/generated/ast.js';
+import type { Model, ValueDefinition, SourcedValue, SumValue, ConditionalBranch, Value } from '../language/generated/ast.js';
 import { isValueDefinition, isSourcedValue, isSumValue, isConditionalValue, isStringEqualityCondition } from '../language/generated/ast.js';
 import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
@@ -32,40 +32,53 @@ export function generateN3(model: Model, filePath: string, destination: string |
     return generatedFilePath;
 }
 
+const createRule = (antecedent: Generated, consequent: Generated) => expandToNode`
+{
+    ${antecedent}
+}
+=>
+{
+    ${consequent}
+} .
+`.appendNewLineIfNotEmpty();
+
 function generateValueDefinition(value: ValueDefinition): Generated {
-    let antecedent, consequent;
     if (isSourcedValue(value.value)) {
-        antecedent = generateSourcedValueAntecedent(value.value, value.name)
-        consequent = generateSourcedValueConsequent(value.value, value.name)
+        return createRule(
+            generateSourcedValueAntecedent(value.value, value.name),
+            generateSourcedValueConsequent(value.value, value.name))
         // todo maybeDefaultValue
     }
-    else if (isSumValue(value.value)) { 
-        antecedent = ''
-        consequent = generateSumValue(value.value, value.name)
+    if (isSumValue(value.value)) { 
+        return createRule(
+            generateSumValueAntecedent(value.value, value.name),
+            generateSumValueConsequent(value.value, value.name))
     }
-    else if (isConditionalValue(value.value)) {
+    if (isConditionalValue(value.value)) {
+        return joinToNode(value.value.conditions, generateConditionalBranch, { separator: '\n' })
+    }
+    // todo value definition
+    
 
-    }
-
-    return expandToNode`
-    {
-       ${antecedent}
-    }
-    =>
-    {
-        ${consequent}
-    } .
-    `.appendNewLineIfNotEmpty()
-        .appendNewLine();
+    return ''
 }
 
-function generateSumValue(sumValue: SumValue, name: string): Generated {
+function generateSumValueAntecedent(sumValue: SumValue, name: string): Generated {
     return expandToNode`
-    :${name} a calc:Sum ; 
-        calc:summand ${joinToNode(sumValue.summands, summand => `:${summand.ref?.name}`, { separator: ', ' })} ;
+    ${joinToNode(sumValue.summands, summand => `
+        :${summand.ref?.name} rdf:value ?${summand.ref?.name} .`, { separator: '\n' })}
+    (${joinToNode(sumValue.summands, summand => `?${summand.ref?.name} ` )}) math:sum ?${name} .
+    `.appendNewLineIfNotEmpty()
+}
+
+function generateSumValueConsequent(sumValue: SumValue, name: string): Generated {
+    const summands = joinToNode(sumValue.summands, summand => `:${summand.ref?.name}`, { separator: ', ' })
+    return expandToNode`
+    :${name} rdf:value ?${name} ;
+        a calc:Sum ;
+        calc:summand ${summands} .
     `.appendNewLineIfNotEmpty();
 }
-
 
 function generateSourcedValueAntecedent(sourcedValue: SourcedValue, name: string): Generated {
     return expandToNode`
@@ -119,24 +132,53 @@ function generateSourcedValueConsequent(sourcedValue: SourcedValue, name: string
 // `.appendNewLineIfNotEmpty();
 // }
 
-// function generateConditionalValue(condValue: ConditionalValue): Generated {
-//     return joinToNode(condValue.conditions, generateConditionalBranch, { separator: '\n' });
-// }
 
-// function generateConditionalBranch(branch: ConditionalBranch): Generated {
-//     const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
-//     const notIncludesPrev = (prev: ConditionalBranch) => 
-//         `[] log:notIncludes { :${branch.$container.name} calc:condition "${prev.name}" } .`
-//     return expandToNode`
-//         {
-//             ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
-//             # TODO actual condition
-//         }
-//         =>
-//         {
-//             :${branch.$container.name} 
-//                 rdf:value ?${branch.$container.name} ;
-//                 calc:condition "${branch.name}" .
-//         } .
-//     `.appendNewLineIfNotEmpty();
-// }
+function generateConditionalBranch(branch: ConditionalBranch): Generated {
+    const name = branch.$container.$container.name
+    const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
+    const notIncludesPrev = (prev: ConditionalBranch) => 
+        `[] log:notIncludes { :${name} calc:condition "${prev.name}" } .`
+    return expandToNode`
+        {
+            ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
+            ${generateConditionAntecedent(branch.value, name)}
+        }
+        =>
+        {
+            :${name} calc:condition "${branch.name}" .
+            ${generateConditionConsequent(branch.value, name)}
+        } .
+    `.appendNewLineIfNotEmpty();
+}
+
+function generateConditionAntecedent(value: Value, name: string): Generated {
+    
+    if(isSumValue(value)) {
+        return expandToNode`
+        ${generateSumValueAntecedent(value, name)}
+        `.appendNewLineIfNotEmpty()
+    }
+    if(isSourcedValue(value)) {
+        return generateSourcedValueAntecedent(value, name)
+    }
+    if(value.definition) {
+        const name = value.definition?.ref?.name
+        // :${value.name} rdf:value ?${value.name} ;
+        return expandToNode`:${name} rdf:value ?${name} ;`.appendNewLineIfNotEmpty()
+    }
+    return ''
+}
+
+function generateConditionConsequent(value: Value, name: string): Generated {
+    
+    if(isSumValue(value)) {
+        return generateSumValueConsequent(value, name)
+    }
+    if(isSourcedValue(value)) {
+        return generateSourcedValueConsequent(value, name)
+    }
+    if(value.definition) {
+        return expandToNode`:${name} rdf:value ?${value.definition?.ref?.name} .`
+    }
+    return ''
+}
