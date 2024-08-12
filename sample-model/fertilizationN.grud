@@ -16,12 +16,13 @@ value referenceYield =
 
 value aa = 10
 value bb = aa
+value cc = aa + bb
 
 value result =
-    if cond1 {
-        test + aa
+    if (aa < 10) {
+        cc + aa
     }
-    if cond2 {
+    if (aa = 10) {
         3
     }
 

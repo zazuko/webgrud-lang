@@ -60,28 +60,47 @@
     :bb rdf:value ?bb .
 } .
 {
-    # TODO generate condition cond1
     
-        :test rdf:value ?test .
-
         :aa rdf:value ?aa .
-    (?test ?aa ) math:sum ?result .
+
+        :bb rdf:value ?bb .
+    (?aa ?bb ) math:sum ?cc .
 }
 =>
 {
-    :result calc:condition "cond1" .
+    :cc rdf:value ?cc ;
+        a calc:Sum ;
+        calc:summand :aa, :bb .
+} .
+{
+    # aa < 10
+    :aa rdf:value ?aa .
+    ?aa math:lessThan 10 .
+    
+    
+        :cc rdf:value ?cc .
+
+        :aa rdf:value ?aa .
+    (?cc ?aa ) math:sum ?result .
+}
+=>
+{
+    :result calc:condition "aa < 10" .
     :result rdf:value ?result ;
         a calc:Sum ;
-        calc:summand :test, :aa .
+        calc:summand :cc, :aa .
 } .
 
 {
-    [] log:notIncludes { :result calc:condition "cond1" } .
-    # TODO generate condition cond2
+    [] log:notIncludes { :result calc:condition "aa < 10" } .
+    # aa = 10
+    :aa rdf:value ?aa .
+    ?aa math:equalTo 10 .
+    
     
 }
 =>
 {
-    :result calc:condition "cond2" .
+    :result calc:condition "aa = 10" .
     :result rdf:value 3 .
 } .

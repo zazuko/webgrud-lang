@@ -1,4 +1,4 @@
-import type { Model, ValueDefinition, SourcedValue, SumValue, ConditionalBranch, Value } from '../language/generated/ast.js';
+import { Model, ValueDefinition, SourcedValue, SumValue, ConditionalBranch, Value, ValueOrLiteral, ComparisonOperator } from '../language/generated/ast.js';
 import { isValueDefinition, isSourcedValue, isSumValue, isConditionalValue, isStringEqualityCondition } from '../language/generated/ast.js';
 import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
@@ -64,10 +64,7 @@ function generateValueDefinition(value: ValueDefinition): Generated {
     }
     if(value.value.numeric) {
         return createRule('', `:${value.name} rdf:value ${value.value.numeric} .`)
-
     }
-    
-
     return ''
 }
 
@@ -140,21 +137,48 @@ function generateSourcedValueConsequent(sourcedValue: SourcedValue, name: string
 // `.appendNewLineIfNotEmpty();
 // }
 
+function getText(cond:ConditionalBranch): string {
+    return cond.comparisons.conjunts.map(c => c.$cstNode?.text).join(' and ')
+}
+
+function getN3(valueOrLiteral: ValueOrLiteral) {
+    if(valueOrLiteral.value) {
+        return `?${valueOrLiteral.value.ref?.name}`
+    }
+    if (valueOrLiteral.numeric) {
+        return valueOrLiteral.numeric
+    }
+    return ''
+}
+
+function getN3Operator(op: ComparisonOperator) {
+    if (op.value === '=') {
+        return 'math:equalTo'
+    }
+    if (op.value === '<') {
+        return 'math:lessThan'
+    }
+    return 'math:what'
+}
 
 function generateConditionalBranch(branch: ConditionalBranch): Generated {
     const name = branch.$container.$container.name
     const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
     const notIncludesPrev = (prev: ConditionalBranch) => 
-        `[] log:notIncludes { :${name} calc:condition "${prev.name}" } .`
+        `[] log:notIncludes { :${name} calc:condition "${getText(prev)}" } .`
+    const references = branch.comparisons.conjunts.flatMap(x => [ x.left, x.right ]).filter(x => x.value).map(x => x.value?.ref?.name)
     return expandToNode`
         {
             ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
-            # TODO generate condition ${branch.name}
+            # ${getText(branch)}
+            ${joinToNode(references, name => `:${name} rdf:value ?${name} .`, { separator: '\n' })}
+            ${joinToNode(branch.comparisons.conjunts, c => `${getN3(c.left)} ${getN3Operator(c.op)} ${getN3(c.right)} .`, { separator: '\n' })}
+            
             ${generateConditionAntecedent(branch.value, name)}
         }
         =>
         {
-            :${name} calc:condition "${branch.name}" .
+            :${name} calc:condition "${getText(branch)}" .
             ${generateConditionConsequent(branch.value, name)}
         } .
     `.appendNewLineIfNotEmpty();
@@ -163,16 +187,13 @@ function generateConditionalBranch(branch: ConditionalBranch): Generated {
 function generateConditionAntecedent(value: Value, name: string): Generated {
     
     if(isSumValue(value)) {
-        return expandToNode`
-        ${generateSumValueAntecedent(value, name)}
-        `.appendNewLineIfNotEmpty()
+        return generateSumValueAntecedent(value, name)
     }
     if(isSourcedValue(value)) {
         return generateSourcedValueAntecedent(value, name)
     }
     if(value.definition) {
         const name = value.definition?.ref?.name
-        // :${value.name} rdf:value ?${value.name} ;
         return expandToNode`:${name} rdf:value ?${name} ;`.appendNewLineIfNotEmpty()
     }
     if(value.numeric) {

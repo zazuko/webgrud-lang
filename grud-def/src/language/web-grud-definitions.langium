@@ -34,7 +34,13 @@ ConditionalValue:
     (conditions+=ConditionalBranch)+;
 
 ConditionalBranch:
-    'if' name=ID '{' value=Value '}' ;
+    'if' '(' comparisons=Comparisons ')' '{' value=Value '}' ;
+
+Comparisons: conjunts+=Comparison ('and' conjunts +=Comparison)*;
+Comparison: left=ValueOrLiteral op=ComparisonOperator right=ValueOrLiteral;
+ValueOrLiteral: value=[ValueDefinition:ID] |  numeric=INT;
+ComparisonOperator: value= ('=' | '<'); // etc..
+
 
 
 SumValue:
