@@ -47,6 +47,21 @@
 } .
 {
     
+}
+=>
+{
+    :aa rdf:value 10 .
+} .
+{
+    :aa rdf:value ?bb .
+}
+=>
+{
+    :bb rdf:value ?bb .
+} .
+{
+    # TODO generate condition cond1
+    
         :test rdf:value ?test .
 
         :aa rdf:value ?aa .
@@ -62,10 +77,11 @@
 
 {
     [] log:notIncludes { :result calc:condition "cond1" } .
-    :aa rdf:value ?aa ;
+    # TODO generate condition cond2
+    
 }
 =>
 {
     :result calc:condition "cond2" .
-    :result rdf:value ?aa .
+    :result rdf:value 3 .
 } .

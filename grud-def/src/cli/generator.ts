@@ -57,7 +57,15 @@ function generateValueDefinition(value: ValueDefinition): Generated {
     if (isConditionalValue(value.value)) {
         return joinToNode(value.value.conditions, generateConditionalBranch, { separator: '\n' })
     }
-    // todo value definition
+    if(value.value.definition) {
+        return createRule(
+            `:${value.value.definition?.ref?.name} rdf:value ?${value.name} .`, 
+            `:${value.name} rdf:value ?${value.name} .`)
+    }
+    if(value.value.numeric) {
+        return createRule('', `:${value.name} rdf:value ${value.value.numeric} .`)
+
+    }
     
 
     return ''
@@ -141,6 +149,7 @@ function generateConditionalBranch(branch: ConditionalBranch): Generated {
     return expandToNode`
         {
             ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
+            # TODO generate condition ${branch.name}
             ${generateConditionAntecedent(branch.value, name)}
         }
         =>
@@ -166,6 +175,9 @@ function generateConditionAntecedent(value: Value, name: string): Generated {
         // :${value.name} rdf:value ?${value.name} ;
         return expandToNode`:${name} rdf:value ?${name} ;`.appendNewLineIfNotEmpty()
     }
+    if(value.numeric) {
+        return ''
+    }
     return ''
 }
 
@@ -179,6 +191,9 @@ function generateConditionConsequent(value: Value, name: string): Generated {
     }
     if(value.definition) {
         return expandToNode`:${name} rdf:value ?${value.definition?.ref?.name} .`
+    }
+    if(value.numeric) {
+        return expandToNode`:${name} rdf:value ${value.numeric} .`
     }
     return ''
 }

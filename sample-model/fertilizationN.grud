@@ -14,13 +14,14 @@ value referenceYield =
         and producttype is "mainProduct"
     take referenceyielddtha
 
-value aa = undefined
+value aa = 10
+value bb = aa
 
 value result =
     if cond1 {
         test + aa
     }
     if cond2 {
-        aa
+        3
     }
 

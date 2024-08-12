@@ -28,7 +28,7 @@ ValueDefinition:
     'value' name=ID '=' value=(Value | ConditionalValue);
 
 Value:
-    UNDEFINED | SourcedValue | SumValue |definition=[ValueDefinition:ID];
+    UNDEFINED | numeric=INT | SourcedValue | SumValue | definition=[ValueDefinition:ID];
 
 ConditionalValue:
     (conditions+=ConditionalBranch)+;
