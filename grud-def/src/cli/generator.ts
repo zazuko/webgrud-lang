@@ -1,5 +1,5 @@
 import { Model, ValueDefinition, SourcedValue, SumValue, ConditionalBranch, Value, ValueOrLiteral, ComparisonOperator } from '../language/generated/ast.js';
-import { isValueDefinition, isSourcedValue, isSumValue, isConditionalValue, isValueReference, isLiteral, isStringEqualityCondition } from '../language/generated/ast.js';
+import { isValueDefinition, isValue, isConditionalValue, isValueReference, isStringEqualityCondition } from '../language/generated/ast.js';
 import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -44,27 +44,22 @@ const createRule = (antecedent: Generated, consequent: Generated) => expandToNod
 `.appendNewLineIfNotEmpty();
 
 function generateValueDefinition(value: ValueDefinition): Generated {
-    if (isSourcedValue(value)) {
-        return createRule(
-            generateSourcedValueAntecedent(value, value.name),
-            generateSourcedValueConsequent(value, value.name))
-        // todo maybeDefaultValue
-    }
-    if (isSumValue(value)) { 
-        return createRule(
-            generateSumValueAntecedent(value, value.name),
-            generateSumValueConsequent(value, value.name))
-    }
     if (isConditionalValue(value)) {
         return joinToNode(value.conditions, generateConditionalBranch, { separator: '\n' })
     }
-    if(isValueReference(value)) {
-        return createRule(
+    if(isValue(value)) {
+        return match(value)
+        .with({ $type: 'SourcedValue' }, value => createRule(
+            generateSourcedValueAntecedent(value, value.name),
+            generateSourcedValueConsequent(value, value.name)))
+        .with({ $type: 'SumValue' }, value => createRule(
+            generateSumValueAntecedent(value, value.name),
+            generateSumValueConsequent(value, value.name)))
+        .with({ $type: 'ValueReference' }, value => createRule(
             `:${value.definition?.ref?.name} rdf:value ?${value.name} .`, 
-            `:${value.name} rdf:value ?${value.name} .`)
-    }
-    if(isLiteral(value)) {
-        return createRule('', `:${value.name} rdf:value ${value.number} .`)
+            `:${value.name} rdf:value ?${value.name} .`))
+        .with({ $type: 'Literal' }, value => createRule('', `:${value.name} rdf:value ${value.number} .`))
+        .exhaustive()
     }
 
     return ''
