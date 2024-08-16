@@ -25,10 +25,18 @@ Factor:
     '}';
 
 ValueDefinition:
-    'value' name=ID '=' value=(Value | ConditionalValue);
+    'value' name=ID '=' (Value | ConditionalValue);
 
 Value:
-    UNDEFINED | numeric=INT | SourcedValue | SumValue | definition=[ValueDefinition:ID];
+    UNDEFINED | SourcedValue | SumValue | ValueOrLiteral;
+
+Literal:
+    number=INT;
+
+ValueReference:
+    definition=[ValueDefinition:ID];
+
+ValueOrLiteral: ValueReference | Literal;
 
 ConditionalValue:
     (conditions+=ConditionalBranch)+;
@@ -38,7 +46,6 @@ ConditionalBranch:
 
 Comparisons: conjunts+=Comparison ('and' conjunts +=Comparison)*;
 Comparison: left=ValueOrLiteral op=ComparisonOperator right=ValueOrLiteral;
-ValueOrLiteral: value=[ValueDefinition:ID] |  numeric=INT;
 ComparisonOperator: value= ('=' | '<'); // etc..
 
 

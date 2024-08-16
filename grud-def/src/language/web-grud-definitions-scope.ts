@@ -32,10 +32,10 @@ export class WebGrudDefinitionsScopeComputation extends DefaultScopeComputation 
             }
         }
 
-        for (const sourcedValue of model.values.map(x => x.value).filter(isSourcedValue)) {
+        for (const sourcedValue of model.values.filter(isSourcedValue)) {
             await interruptAndCheck(cancelToken);
 
-            if (sourcedValue.cube?.ref) {
+            if (isSourcedValue(sourcedValue) && sourcedValue.cube?.ref) {
                 const cube = sourcedValue.cube.ref;
                 let descriptions;
                 if (cube2DimensionDescriptionsDict.has(cube)) {

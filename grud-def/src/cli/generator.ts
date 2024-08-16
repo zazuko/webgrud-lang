@@ -1,5 +1,5 @@
 import { Model, ValueDefinition, SourcedValue, SumValue, ConditionalBranch, Value, ValueOrLiteral, ComparisonOperator } from '../language/generated/ast.js';
-import { isValueDefinition, isSourcedValue, isSumValue, isConditionalValue, isStringEqualityCondition } from '../language/generated/ast.js';
+import { isValueDefinition, isSourcedValue, isSumValue, isConditionalValue, isValueReference, isLiteral, isStringEqualityCondition } from '../language/generated/ast.js';
 import { type Generated, expandToNode, joinToNode, toString } from 'langium/generate';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -43,28 +43,29 @@ const createRule = (antecedent: Generated, consequent: Generated) => expandToNod
 `.appendNewLineIfNotEmpty();
 
 function generateValueDefinition(value: ValueDefinition): Generated {
-    if (isSourcedValue(value.value)) {
+    if (isSourcedValue(value)) {
         return createRule(
-            generateSourcedValueAntecedent(value.value, value.name),
-            generateSourcedValueConsequent(value.value, value.name))
+            generateSourcedValueAntecedent(value, value.name),
+            generateSourcedValueConsequent(value, value.name))
         // todo maybeDefaultValue
     }
-    if (isSumValue(value.value)) { 
+    if (isSumValue(value)) { 
         return createRule(
-            generateSumValueAntecedent(value.value, value.name),
-            generateSumValueConsequent(value.value, value.name))
+            generateSumValueAntecedent(value, value.name),
+            generateSumValueConsequent(value, value.name))
     }
-    if (isConditionalValue(value.value)) {
-        return joinToNode(value.value.conditions, generateConditionalBranch, { separator: '\n' })
+    if (isConditionalValue(value)) {
+        return joinToNode(value.conditions, generateConditionalBranch, { separator: '\n' })
     }
-    if(value.value.definition) {
+    if(isValueReference(value)) {
         return createRule(
-            `:${value.value.definition?.ref?.name} rdf:value ?${value.name} .`, 
+            `:${value.definition?.ref?.name} rdf:value ?${value.name} .`, 
             `:${value.name} rdf:value ?${value.name} .`)
     }
-    if(value.value.numeric) {
-        return createRule('', `:${value.name} rdf:value ${value.value.numeric} .`)
+    if(isLiteral(value)) {
+        return createRule('', `:${value.name} rdf:value ${value.number} .`)
     }
+
     return ''
 }
 
@@ -142,11 +143,11 @@ function getText(cond:ConditionalBranch): string {
 }
 
 function getN3(valueOrLiteral: ValueOrLiteral) {
-    if(valueOrLiteral.value) {
-        return `?${valueOrLiteral.value.ref?.name}`
+    if(isValueReference(valueOrLiteral)) {
+        return `?${valueOrLiteral.definition?.ref?.name}`
     }
-    if (valueOrLiteral.numeric) {
-        return valueOrLiteral.numeric
+    if (isLiteral(valueOrLiteral)) {
+        return valueOrLiteral.number
     }
     return ''
 }
@@ -162,11 +163,14 @@ function getN3Operator(op: ComparisonOperator) {
 }
 
 function generateConditionalBranch(branch: ConditionalBranch): Generated {
-    const name = branch.$container.$container.name
+    const name = branch.$container.name
     const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
     const notIncludesPrev = (prev: ConditionalBranch) => 
         `[] log:notIncludes { :${name} calc:condition "${getText(prev)}" } .`
-    const references = branch.comparisons.conjunts.flatMap(x => [ x.left, x.right ]).filter(x => x.value).map(x => x.value?.ref?.name)
+    const references = branch.comparisons.conjunts
+        .flatMap(x => [ x.left, x.right ])
+        .filter(isValueReference)
+        .map(x => x.definition?.ref?.name)
     return expandToNode`
         {
             ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
@@ -192,11 +196,11 @@ function generateConditionAntecedent(value: Value, name: string): Generated {
     if(isSourcedValue(value)) {
         return generateSourcedValueAntecedent(value, name)
     }
-    if(value.definition) {
+    if(isValueReference(value)) {
         const name = value.definition?.ref?.name
         return expandToNode`:${name} rdf:value ?${name} ;`.appendNewLineIfNotEmpty()
     }
-    if(value.numeric) {
+    if(isLiteral(value)) {
         return ''
     }
     return ''
@@ -210,11 +214,11 @@ function generateConditionConsequent(value: Value, name: string): Generated {
     if(isSourcedValue(value)) {
         return generateSourcedValueConsequent(value, name)
     }
-    if(value.definition) {
+    if(isValueReference(value)) {
         return expandToNode`:${name} rdf:value ?${value.definition?.ref?.name} .`
     }
-    if(value.numeric) {
-        return expandToNode`:${name} rdf:value ${value.numeric} .`
+    if(isLiteral(value)) {
+        return expandToNode`:${name} rdf:value ${value.number} .`
     }
     return ''
 }
