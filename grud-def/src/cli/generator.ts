@@ -4,6 +4,7 @@ import { type Generated, expandToNode, joinToNode, toString } from 'langium/gene
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { extractDestinationAndName } from './cli-util.js';
+import { match } from 'ts-pattern';
 
 export function generateN3(model: Model, filePath: string, destination: string | undefined): string {
     const data = extractDestinationAndName(filePath, destination);
@@ -143,23 +144,17 @@ function getText(cond:ConditionalBranch): string {
 }
 
 function getN3(valueOrLiteral: ValueOrLiteral) {
-    if(isValueReference(valueOrLiteral)) {
-        return `?${valueOrLiteral.definition?.ref?.name}`
-    }
-    if (isLiteral(valueOrLiteral)) {
-        return valueOrLiteral.number
-    }
-    return ''
+    return match(valueOrLiteral)
+    .with({ $type: 'ValueReference' }, value => `?${value.definition?.ref?.name}`)
+    .with({ $type: 'Literal' }, value => value.number)
+    .exhaustive()
 }
 
 function getN3Operator(op: ComparisonOperator) {
-    if (op.value === '=') {
-        return 'math:equalTo'
-    }
-    if (op.value === '<') {
-        return 'math:lessThan'
-    }
-    return 'math:what'
+    return match(op)
+    .with({ value: '=' }, _op => 'math:equalTo')
+    .with({ value: '<' }, _op => 'math:lessThan')
+    .exhaustive()
 }
 
 function generateConditionalBranch(branch: ConditionalBranch): Generated {
@@ -189,36 +184,22 @@ function generateConditionalBranch(branch: ConditionalBranch): Generated {
 }
 
 function generateConditionAntecedent(value: Value, name: string): Generated {
-    
-    if(isSumValue(value)) {
-        return generateSumValueAntecedent(value, name)
-    }
-    if(isSourcedValue(value)) {
-        return generateSourcedValueAntecedent(value, name)
-    }
-    if(isValueReference(value)) {
+    return match(value)
+    .with({ $type: 'SumValue' }, value => generateSumValueAntecedent(value, name))
+    .with({ $type: 'SourcedValue' }, value => generateSourcedValueAntecedent(value, name))
+    .with({ $type: 'ValueReference' }, value => {
         const name = value.definition?.ref?.name
         return expandToNode`:${name} rdf:value ?${name} ;`.appendNewLineIfNotEmpty()
-    }
-    if(isLiteral(value)) {
-        return ''
-    }
-    return ''
+    })
+    .with({ $type: 'Literal' }, _value => '')
+    .exhaustive()
 }
 
 function generateConditionConsequent(value: Value, name: string): Generated {
-    
-    if(isSumValue(value)) {
-        return generateSumValueConsequent(value, name)
-    }
-    if(isSourcedValue(value)) {
-        return generateSourcedValueConsequent(value, name)
-    }
-    if(isValueReference(value)) {
-        return expandToNode`:${name} rdf:value ?${value.definition?.ref?.name} .`
-    }
-    if(isLiteral(value)) {
-        return expandToNode`:${name} rdf:value ${value.number} .`
-    }
-    return ''
+    return match(value)
+    .with({ $type: 'SumValue' }, value => generateSumValueConsequent(value, name))
+    .with({ $type: 'SourcedValue' }, value => generateSourcedValueConsequent(value, name))
+    .with({ $type: 'ValueReference' }, value => expandToNode`:${name} rdf:value ?${value.definition?.ref?.name} .`)
+    .with({ $type: 'Literal' }, value => expandToNode`:${name} rdf:value ${value.number} .`)
+    .exhaustive()
 }
