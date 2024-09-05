@@ -37,7 +37,8 @@ SourcedValue:
         'where' conditions+=Condition
         ('and' conditions+=Condition)*
         'take' resultDimension=[Dimension:ID]
-        ('default' defaultValue=INT)?;
+        ('default' defaultValue=INT)?
+        'comment' comment=STRING;
 
 UndefinedValue:
     'value' name=ID '=' 'undefined';

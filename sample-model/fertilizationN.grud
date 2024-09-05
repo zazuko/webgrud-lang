@@ -14,22 +14,26 @@ value fertilizationNorm =
     where nutrient_ is N
         and crop is input crop
     take fertilizationnormkgha
+    comment "here goes comment for fertilizationNorm"
 
 value referenceYield =
     from table PRIFm8t9a
     where crop is input crop
         and producttype is "mainProduct"
     take referenceyielddtha
+    comment "here goes comment for referenceYield"
 
 value maxTargetYield =
     from table PRIFm8t11
     where crop is input crop
     take maxtargetyielddtha
+    comment "here goes comment for maxTargetYield"
 
 value correctionT11 =
     from table PRIFm8t11
     where crop is input crop
     take correctiontargetyieldkgdt
+    comment "here goes comment for correctionT11"
 
 value correctionTargetYield = undefined
 // TODO: the following is not yet supported in this DSL -- conditional expressions
@@ -58,6 +62,7 @@ value correctionT13 =
         and specifications is input specification
     take correctionfactormean
     default 0
+    comment "here goes comment for correctionT13"
 
 value correctionT15 = 
     from table PRIFm8t15
@@ -68,6 +73,7 @@ value correctionT15 =
         and precipitation-intensity is input precipitation/intensity
 */
     take correctionvalue
+    comment "here goes comment for correctionT15"
 
 value availableN = undefined
 // TODO: the following is not yet supported in this DSL -- The definition of a value can be a complex, nested calculation containing nested definitions of other values
