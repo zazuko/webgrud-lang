@@ -83,7 +83,8 @@ function generateSourcedValue(sourcedValue: SourcedValue): Generated {
     :${sourcedValue.name}
         rdf:value ?${sourcedValue.resultDimension.ref?.name} ;
         qudt:unit ${sourcedValue.resultDimension.ref?.unit?.ref?.prefixedName} ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "${sourcedValue.comment}" .
 }
 .
 ${maybeDefaultValue}

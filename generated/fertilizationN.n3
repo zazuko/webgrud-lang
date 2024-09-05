@@ -43,7 +43,8 @@
     :fertilizationNorm
         rdf:value ?fertilizationnormkgha ;
         qudt:unit unit:KiloGM-PER-HA ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "here goes comment for fertilizationNorm" .
 }
 .
 
@@ -57,7 +58,8 @@
     :referenceYield
         rdf:value ?referenceyielddtha ;
         qudt:unit unit:DeciTONNE-PER-HA ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "here goes comment for referenceYield" .
 }
 .
 
@@ -70,7 +72,8 @@
     :maxTargetYield
         rdf:value ?maxtargetyielddtha ;
         qudt:unit unit:DeciTONNE-PER-HA ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "here goes comment for maxTargetYield" .
 }
 .
 
@@ -83,7 +86,8 @@
     :correctionT11
         rdf:value ?correctiontargetyieldkgdt ;
         qudt:unit unit:KiloGM-PER-DeciTONNE ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "here goes comment for correctionT11" .
 }
 .
 
@@ -96,7 +100,8 @@
     :correctionT13
         rdf:value ?correctionfactormean ;
         qudt:unit unit:KiloGM-PER-HA ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "here goes comment for correctionT13" .
 }
 .
 
@@ -118,7 +123,8 @@
     :correctionT15
         rdf:value ?correctionvalue ;
         qudt:unit unit:KiloGM-PER-HA ;
-        calc:source ?obs .
+        calc:source ?obs ;
+        rdfs:comment "here goes comment for correctionT15" .
 }
 .
 
