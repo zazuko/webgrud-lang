@@ -13,14 +13,14 @@
     
         :fertilizationNorm rdf:value ?fertilizationNorm .
 
-        :referenceYield rdf:value ?referenceYield .
-    (?fertilizationNorm ?referenceYield ) math:sum ?test .
+        :aa rdf:value ?aa .
+    (?fertilizationNorm ?aa ) math:sum ?test .
 }
 =>
 {
     :test rdf:value ?test ;
         a calc:Sum ;
-        calc:summand :fertilizationNorm, :referenceYield .
+        calc:summand :fertilizationNorm, :aa .
 } .
 {
     <PRIFm8t9c/3> cube:observationSet [ cube:observation ?obs ] .

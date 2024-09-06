@@ -1,6 +1,6 @@
 
 
-value test = fertilizationNorm + referenceYield
+value test = fertilizationNorm + aa
 
 value fertilizationNorm =
     from table PRIFm8t9c
