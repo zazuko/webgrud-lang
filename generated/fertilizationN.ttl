@@ -1,0 +1,12 @@
+@base <https://agriculture.ld.admin.ch/agroscope/> .
+@prefix : <https://agriculture.ld.admin.ch/prif/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+</table/PRIFm8t9c> </api/schema/parameters> [
+        sh:property [ sh:name <PRIFm8t9c/nutrient_> ; sh:path <N> ] ;
+sh:property [ sh:name <PRIFm8t9c/crop> ; sh:path :crop ] ;	
+    ] .
+</table/PRIFm8t9a> </api/schema/parameters> [
+        sh:property [ sh:name <PRIFm8t9a/crop> ; sh:path :crop ] ;
+sh:property [ sh:name <PRIFm8t9a/producttype> ; sh:path "mainProduct" ] ;	
+    ] .

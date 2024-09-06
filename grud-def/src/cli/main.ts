@@ -5,6 +5,7 @@ import { WebGrudDefinitionsLanguageMetaData } from '../language/generated/module
 import { createWebGrudDefinitionsServices } from '../language/web-grud-definitions-module.js';
 import { setRootFolder, extractAstNode } from './cli-util.js';
 import { generateN3 } from './generator.js';
+import { generateTTL } from './generator-turtle.js';
 import { NodeFileSystem } from 'langium/node';
 import * as url from 'node:url';
 import * as fs from 'node:fs/promises';
@@ -21,6 +22,9 @@ export const generateAction = async (fileName: string, opts: GenerateOptions): P
     model.$document?.references
     const generatedFilePath = generateN3(model, fileName, opts.destination);
     console.log(chalk.green(`N3 rules generated successfully: ${generatedFilePath}`));
+
+    const generatedFilePathTTL = generateTTL(model, fileName, opts.destination);
+    console.log(chalk.green(`ttl generated successfully: ${generatedFilePathTTL}`));
 };
 
 export type GenerateOptions = {
