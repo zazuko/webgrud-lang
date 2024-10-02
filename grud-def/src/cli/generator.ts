@@ -66,10 +66,9 @@ function generateValueDefinition(value: ValueDefinition): Generated {
 }
 
 function generateSumValueAntecedent(sumValue: SumValue, name: string): Generated {
-    return expandToNode`
-    ${joinToNode(sumValue.summands, summand => `
-        :${summand.ref?.name} rdf:value ?${summand.ref?.name} .`, { separator: '\n' })}
-    (${joinToNode(sumValue.summands, summand => `?${summand.ref?.name} ` )}) math:sum ?${name} .
+    return expandToNode`${joinToNode(sumValue.summands, summand => 
+        `:${summand.ref?.name} rdf:value ?${summand.ref?.name} .`, { separator: '\n\t' })}
+    (${joinToNode(sumValue.summands, summand => ` ?${summand.ref?.name} ` )}) math:sum ?${name} .
     `.appendNewLineIfNotEmpty()
 }
 
@@ -155,26 +154,32 @@ function getN3Operator(op: ComparisonOperator) {
 function generateConditionalBranch(branch: ConditionalBranch): Generated {
     const name = branch.$container.name
     const prevConditions = branch.$container.conditions.slice(0, branch.$containerIndex)
-    const notIncludesPrev = (prev: ConditionalBranch) => 
-        `[] log:notIncludes { :${name} calc:condition "${getText(prev)}" } .`
+    const notIncludesPrev = (prev: ConditionalBranch) => expandToNode`
+        [] log:notIncludes { :${name} calc:condition "${getText(prev)}" } .`
     const references = branch.comparisons.conjunts
         .flatMap(x => [ x.left, x.right ])
         .filter(isValueReference)
         .map(x => x.definition?.ref?.name)
     return expandToNode`
-        {
-            ${joinToNode(prevConditions, notIncludesPrev, { separator: ' .\n' })}
-            # ${getText(branch)}
-            ${joinToNode(references, name => `:${name} rdf:value ?${name} .`, { separator: '\n' })}
-            ${joinToNode(branch.comparisons.conjunts, c => `${getN3(c.left)} ${getN3Operator(c.op)} ${getN3(c.right)} .`, { separator: '\n' })}
-            
-            ${generateConditionAntecedent(branch.value, name)}
-        }
-        =>
-        {
-            :${name} calc:condition "${getText(branch)}" .
-            ${generateConditionConsequent(branch.value, name)}
-        } .
+    { 
+        :${name} calc:condition "${getText(branch)}" .
+    }
+    <=
+    {
+        ${joinToNode(prevConditions, notIncludesPrev, { separator: ' \n\t' })}
+        ${joinToNode(references, name => `:${name} rdf:value ?${name} .`, { separator: '\n' })}
+        ${joinToNode(branch.comparisons.conjunts, c => `${getN3(c.left)} ${getN3Operator(c.op)} ${getN3(c.right)} .`, { separator: '\n' })}
+    } .
+
+    { 
+        :${name} calc:condition "${getText(branch)}" .
+        ${generateConditionAntecedent(branch.value, name)}
+    }
+    =>
+    {
+        :${name} calc:condition "case: ${getText(branch)}" .
+        ${generateConditionConsequent(branch.value, name)}
+    } .
     `.appendNewLineIfNotEmpty();
 }
 

@@ -10,11 +10,9 @@
 @prefix schema: <http://schema.org/> .
 
 {
-    
-        :fertilizationNorm rdf:value ?fertilizationNorm .
-
-        :aa rdf:value ?aa .
-    (?fertilizationNorm ?aa ) math:sum ?test .
+    :fertilizationNorm rdf:value ?fertilizationNorm .
+	:aa rdf:value ?aa .
+        ( ?fertilizationNorm  ?aa ) math:sum ?test .
 }
 =>
 {
@@ -60,11 +58,9 @@
     :bb rdf:value ?bb .
 } .
 {
-    
-        :aa rdf:value ?aa .
-
-        :bb rdf:value ?bb .
-    (?aa ?bb ) math:sum ?cc .
+    :aa rdf:value ?aa .
+	:bb rdf:value ?bb .
+        ( ?aa  ?bb ) math:sum ?cc .
 }
 =>
 {
@@ -72,35 +68,45 @@
         a calc:Sum ;
         calc:summand :aa, :bb .
 } .
+{ 
+    :result calc:condition "aa < 10" .
+}
+<=
 {
-    # aa < 10
     :aa rdf:value ?aa .
     ?aa math:lessThan 10 .
-    
-    
-        :cc rdf:value ?cc .
+} .
 
-        :aa rdf:value ?aa .
-    (?cc ?aa ) math:sum ?result .
+{ 
+    :result calc:condition "aa < 10" .
+    :cc rdf:value ?cc .
+	:aa rdf:value ?aa .
+        ( ?cc  ?aa ) math:sum ?result .
 }
 =>
 {
-    :result calc:condition "aa < 10" .
+    :result calc:condition "case: aa < 10" .
     :result rdf:value ?result ;
         a calc:Sum ;
         calc:summand :cc, :aa .
 } .
 
+{ 
+    :result calc:condition "aa = 10" .
+}
+<=
 {
     [] log:notIncludes { :result calc:condition "aa < 10" } .
-    # aa = 10
     :aa rdf:value ?aa .
     ?aa math:equalTo 10 .
-    
+} .
+
+{ 
+    :result calc:condition "aa = 10" .
     
 }
 =>
 {
-    :result calc:condition "aa = 10" .
+    :result calc:condition "case: aa = 10" .
     :result rdf:value 3 .
 } .
